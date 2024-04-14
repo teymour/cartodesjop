@@ -1,0 +1,2 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Para","NOM_EPREUV":"CIRCULATION-DISPOSITIF - ARENA PARIS NORD - SP","TRI":"NPA","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.514410,48.973175],[2.516255,48.972640],[2.514582,48.969879],[2.512650,48.970414],[2.514410,48.973175]]]}}] }

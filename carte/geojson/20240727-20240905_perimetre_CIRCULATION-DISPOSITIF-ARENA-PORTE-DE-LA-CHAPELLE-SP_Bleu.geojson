@@ -1,0 +1,2 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Para","NOM_EPREUV":"CIRCULATION-DISPOSITIF - ARENA PORTE DE LA CHAPELLE - SP","TRI":"CPL","TYPE_PERI":"Bleu"},"geometry":{"type":"Polygon","coordinates":[[[2.370129,48.900302],[2.370987,48.900104],[2.371073,48.898807],[2.370300,48.898581],[2.359486,48.898383],[2.359486,48.898807],[2.364206,48.898694],[2.366738,48.899822],[2.370129,48.899879],[2.370129,48.900302]]]}}] }

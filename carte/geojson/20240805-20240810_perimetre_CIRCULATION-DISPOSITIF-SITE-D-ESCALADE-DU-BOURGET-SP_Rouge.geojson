@@ -1,0 +1,2 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Oly","NOM_EPREUV":"CIRCULATION-DISPOSITIF - SITE D'ESCALADE DU BOURGET - SP","TRI":"LBO","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.419739,48.939190],[2.421198,48.938711],[2.423043,48.938683],[2.423086,48.938344],[2.420726,48.934736],[2.418451,48.934313],[2.417550,48.934764],[2.416949,48.935864],[2.416778,48.935807],[2.415619,48.938260],[2.419739,48.939190]]]}}] }

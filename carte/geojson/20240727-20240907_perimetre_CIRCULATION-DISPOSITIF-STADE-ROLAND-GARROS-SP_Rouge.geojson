@@ -1,0 +1,2 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Oly","NOM_EPREUV":"CIRCULATION-DISPOSITIF - STADE ROLAND-GARROS - SP","TRI":"RGA","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.242885,48.847999],[2.257047,48.847858],[2.255716,48.845316],[2.249966,48.844243],[2.244430,48.845711],[2.242112,48.847745],[2.242885,48.847999]]]}}] }

@@ -1,0 +1,2 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Oly","NOM_EPREUV":"CIRCULATION-DISPOSITIF - ARENA BERCY - SP","TRI":"BCY","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.379613,48.840345],[2.382188,48.839893],[2.381802,48.838933],[2.381072,48.838622],[2.385235,48.835317],[2.382574,48.833820],[2.380257,48.835233],[2.378240,48.836814],[2.376566,48.838566],[2.376566,48.838735],[2.379184,48.840176],[2.379613,48.840345]]]}}] }

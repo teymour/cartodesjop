@@ -1,0 +1,3 @@
+{ "type": "FeatureCollection", "features": [
+{"type":"Feature","properties":{"COMPE":"Oly","NOM_EPREUV":"CIRCULATION-DISPOSITIF - EIFFEL CHAMP-DE-MARS - SP","TRI":"ECM","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.290649,48.858221],[2.290649,48.852884],[2.288461,48.855030],[2.289534,48.857063],[2.290263,48.857939],[2.290649,48.858221]]]}},
+{"type":"Feature","properties":{"COMPE":"Oly","NOM_EPREUV":"CIRCULATION-DISPOSITIF - EIFFEL CHAMP-DE-MARS - SP","TRI":"ECM","TYPE_PERI":"Rouge"},"geometry":{"type":"Polygon","coordinates":[[[2.294726,48.861045],[2.305241,48.854296],[2.300692,48.851162],[2.298331,48.852715],[2.294211,48.853732],[2.291765,48.851811],[2.288461,48.855030],[2.289534,48.857063],[2.290263,48.857939],[2.294726,48.861045]]]}}] }

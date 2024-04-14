@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte Leaflet avec GeoJSON</title>
+  <link rel="stylesheet" href="./css/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+    }
+    #result {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Formulaire pour saisir l'adresse -->
+  <form id="addressForm">
+    <input type="text" id="addressInput" placeholder="Entrez une adresse">
+    <button type="submit">Trouver</button>
+  </form>
+
+  <!-- Div pour afficher le résultat -->
+  <div id="result"></div>
+
+  <!-- Ajouter des contrôles pour les couches GeoJSON -->
+  <div id="layerControls"></div>
+
+  <script src="./js/leaflet.js"></script>
+  <script src="./js/turf.min.js"></script>
+  <script>
+    var map = L.map('map').setView([48.8566, 2.3522], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var geojsonLayers = {};
+    var geojsonPaths_rouge = [
+        "geojson/20240719-20240725_cer1_j8j1_4ep-LOYL_rouge.geojson",
+        "geojson/20240726-20240726_cer1_jj_4ep-Wye8_rouge.geojson",
+        "geojson/20240719-20240725_perimetre_CER1-JoursAvants_Rouge.geojson",
+        "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_Rouge.geojson",
+        "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_Rouge.geojson",
+        "geojson/20240724-20240727_perimetre_cyclisme-clm_Rouge.geojson",
+        "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_Rouge.geojson",
+        "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_Rouge.geojson",
+        "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_Rouge.geojson",
+        "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_Rouge.geojson",
+        "geojson/20240726-20240726_perimetre_CER1-JourJ_Rouge.geojson",
+        "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_Rouge.geojson",
+        "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_Rouge.geojson",
+        "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_Rouge.geojson",
+        "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_Rouge.geojson",
+        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_Rouge.geojson",
+        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_Rouge.geojson",
+        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_Rouge.geojson",
+        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_Rouge.geojson",
+        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_Rouge.geojson",
+        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_Rouge.geojson",
+        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_Rouge.geojson",
+        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_Rouge.geojson",
+        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_Rouge.geojson",
+        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-STADE-NAUTIQUE-DE-VAIRES-SUR-MARNE-SP_Rouge.geojson",
+        "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_Rouge.geojson",
+        "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_Rouge.geojson",
+        "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_Rouge.geojson",
+        "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_Rouge.geojson",
+        "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_Rouge.geojson",
+        "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_Rouge.geojson",
+        "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_Rouge.geojson",
+        "geojson/20240803-20240804_perimetre_course-en-ligne-homme_Rouge.geojson",
+        "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_Rouge.geojson",
+        "geojson/20240805-20240810_perimetre_CIRCULATION-DISPOSITIF-SITE-D-ESCALADE-DU-BOURGET-SP_Rouge.geojson",
+        "geojson/20240810-20240811_perimetre_marathon-femme_Rouge.geojson",
+        "geojson/20240810-20240811_perimetre_marathon-homme_Rouge.geojson",
+        "geojson/20240810-20240811_perimetre_marathon-pour-tous_Rouge.geojson",
+        "geojson/20240828-20240828_perimetre_CER3-Ceremonie-d-ouverture-Jeux-Paralympiques_Rouge.geojson",
+        "geojson/20240903-20240908_perimetre_PARA-Cyclisme-fam_Rouge.geojson",
+        "geojson/20240903-20240908_perimetre_PARA-MassEvent_Rouge.geojson",
+        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Contre-la-Montre_Rouge.geojson",
+        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J1_Rouge.geojson",
+        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J2_Rouge.geojson",
+        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J3_Rouge.geojson",
+        "geojson/20240908-20240908_perimetre_PARA-Marathon_Rouge.geojson",
+        "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_Rouge.geojson",
+    ];
+
+geojsonPaths_blue = [
+    "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_Bleu.geojson",
+    "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_Bleu.geojson",
+    "geojson/20240719-20240725_perimetre_CER1-JoursAvants_Bleu.geojson",
+    "geojson/20240724-20240727_perimetre_cyclisme-clm_Bleu.geojson",
+    "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_Bleu.geojson",
+    "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_Bleu.geojson",
+    "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_Bleu.geojson",
+    "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_Bleu.geojson",
+    "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_Bleu.geojson",
+    "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_Bleu.geojson",
+    "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_Bleu.geojson",
+    "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_Bleu.geojson",
+    "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_Bleu.geojson",
+    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_Bleu.geojson",
+    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_Bleu.geojson",
+    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_Bleu.geojson",
+    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_Bleu.geojson",
+    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_Bleu.geojson",
+    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_Bleu.geojson",
+    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_Bleu.geojson",
+    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_Bleu.geojson",
+    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_Bleu.geojson",
+    "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_Bleu.geojson",
+    "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_Bleu.geojson",
+    "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_Bleu.geojson",
+    "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_Bleu.geojson",
+    "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_Bleu.geojson",
+    "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_Bleu.geojson",
+    "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_Bleu.geojson",
+    "geojson/20240803-20240804_perimetre_course-en-ligne-homme_Bleu.geojson",
+    "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_Bleu.geojson",
+    "geojson/20240810-20240811_perimetre_marathon-femme_Bleu.geojson",
+    "geojson/20240810-20240811_perimetre_marathon-homme_Bleu.geojson",
+    "geojson/20240719-20240725_cer1_j8j1_4ep-LOYL_bleu.geojson",
+    "geojson/20240810-20240811_perimetre_marathon-pour-tous_Bleu.geojson",
+];
+
+
+geojsonPaths_silt = [
+    "geojson/20240726-20240726_parisien_silt.geojson",
+    "geojson/20240726-20240726_cer1_jj_4ep-Wye8_silt.geojson",
+    "geojson/20240724-20240811_presentation_sites-olympiques_vue-92_4ep-ejtY_colombes_silt.geojson",
+    "geojson/20240724-20240811_presentation_sites-olympiques_vue-92_4ep-ejtY_defense_silt.geojson",
+    "geojson/20240724-20240811_presentation_sites-olympiques-vue-93_4ep-am7z_circuit_silt.geojson",
+    "geojson/20240724-20240811_presentation_sites-olympiques-vue-93_4ep-am7z_saintdenis_silt.geojson",
+    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris_4ep_01-QT2t_silt.geojson",
+    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris_4ep_02-0l7u_silt.geojson",
+    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris_4ep_03-gfyW_silt.geojson",
+    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris_4ep_04-jYaC_silt.geojson",
+    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris_4ep_05-royF_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vue-93_4ep-am7z_circuit_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vue-93_4ep-am7z_saintdenis_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris_4ep_01-QT2t_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris_4ep_02-0l7u_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris_4ep_03-gfyW_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris_4ep_04-jYaC_silt.geojson",
+    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris_4ep_05-royF_silt.geojson",
+];
+
+geojsonPaths_arrondissements = [
+    "geojson/arrondissements.geojson",
+]
+
+    function addGeoJSONToMap(geojson, layerName, color, opacity) {
+      var layer = L.geoJSON(geojson, {
+        style: function (feature) {
+          return {
+              'color': color,
+              'opacity': 1,
+              'fillOpacity': opacity
+          };
+        }
+      }).addTo(map);
+      geojsonLayers[layerName] = layer;
+      createLayerCheckbox(layerName);
+    }
+
+    function loadGeoJSONFiles(geojsons, color, opacity) {
+      geojsons.forEach(function (path) {
+        fetch(path)
+          .then(response => response.json())
+          .then(data => {
+            var layerName = path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
+            addGeoJSONToMap(data, layerName, color, opacity);
+          });
+      });
+    }
+
+    loadGeoJSONFiles(geojsonPaths_blue, 'blue', 1);
+    loadGeoJSONFiles(geojsonPaths_rouge, 'red', 1);
+    loadGeoJSONFiles(geojsonPaths_silt, 'gray', 1);
+    loadGeoJSONFiles(geojsonPaths_arrondissements, 'black', 0);
+
+    // Fonction pour créer une case à cocher pour chaque couche GeoJSON
+    function createLayerCheckbox(layerName) {
+      var checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.id = layerName;
+      checkbox.checked = true;
+
+      var label = document.createElement('label');
+      label.htmlFor = layerName;
+      label.appendChild(document.createTextNode(layerName));
+
+      var br = document.createElement('br');
+
+      document.getElementById('layerControls').appendChild(checkbox);
+      document.getElementById('layerControls').appendChild(label);
+      document.getElementById('layerControls').appendChild(br);
+
+      checkbox.addEventListener('change', function () {
+        if (this.checked) {
+          map.addLayer(geojsonLayers[layerName]);
+        } else {
+          map.removeLayer(geojsonLayers[layerName]);
+        }
+      });
+    }
+
+    function findLayersContainingPoint(point) {
+      var layersContainingPoint = [];
+      for (var layerName in geojsonLayers) {
+        if (geojsonLayers.hasOwnProperty(layerName)) {
+          var layer = geojsonLayers[layerName];
+          layer.eachLayer(function (feature) {
+            if (feature.getBounds().contains(point) && turf.booleanPointInPolygon([point.lng, point.lat], feature.toGeoJSON().geometry)) {
+              layersContainingPoint.push(layerName);
+            }
+          });
+        }
+      }
+      return layersContainingPoint;
+    }
+
+    document.getElementById('addressForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var address = document.getElementById('addressInput').value;
+      // Utilisez un service de géocodage pour convertir l'adresse en coordonnées géographiques
+      // Ici, j'utilise un exemple factice pour la démonstration
+      var point = L.latLng( 48.8594544 , 2.3471924); // Latitude et longitude factices
+      var layersContainingPoint = findLayersContainingPoint(point);
+
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '';
+      if (layersContainingPoint.length > 0) {
+        var resultText = 'Le point se trouve dans les couches suivantes : ' + layersContainingPoint.join(', ');
+        resultDiv.textContent = resultText;
+      } else {
+        resultDiv.textContent = 'Le point ne se trouve dans aucune couche.';
+      }
+      L.marker(point).addTo(map);
+      map.setView(point, 13);
+    });
+  </script>
+</body>
+</html>
