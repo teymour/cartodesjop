@@ -431,6 +431,10 @@ geojsonPaths_arrondissements = [
         })
     }
     function orderLayers() {
+        geojsonPaths['rouge'].forEach((item) => {
+            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
+            geojsonLayers[layerName].bringToBack()
+        });
         geojsonPaths['bleu'].forEach((item) => {
             var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
             geojsonLayers[layerName].bringToBack()
