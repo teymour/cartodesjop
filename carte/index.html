@@ -36,7 +36,7 @@
   <script>
     var map = L.map('map').setView([48.8566, 2.3522], 12);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
@@ -180,10 +180,10 @@ geojsonPaths_arrondissements = [
       });
     }
 
-    loadGeoJSONFiles(geojsonPaths_blue, 'blue', 1);
+    loadGeoJSONFiles(geojsonPaths_blue, 'orange', 1);
     loadGeoJSONFiles(geojsonPaths_rouge, 'red', 1);
-    loadGeoJSONFiles(geojsonPaths_silt, 'gray', 1);
-    loadGeoJSONFiles(geojsonPaths_arrondissements, 'black', 0);
+    loadGeoJSONFiles(geojsonPaths_silt, 'black', 1);
+    loadGeoJSONFiles(geojsonPaths_arrondissements, 'gray', 0);
 
     function searchAddresses() {
         const query = input.value;
