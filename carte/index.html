@@ -209,13 +209,21 @@ geojsonPaths_arrondissements = [
       });
     }
 
-    function findLayersContainingPoint(point) {
+    function findLayersContainingPoint(point, pseudo_rayon = 1, exclude = []) {
       var layersContainingPoint = [];
       for (var layerName in geojsonLayers) {
         if (geojsonLayers.hasOwnProperty(layerName)) {
           var layer = geojsonLayers[layerName];
           layer.eachLayer(function (feature) {
-            if (feature.getBounds().contains(point) && turf.booleanPointInPolygon([point.lng, point.lat], feature.toGeoJSON().geometry)) {
+            const carre = turf.polygon([[
+                                    [point.lng - pseudo_rayon / 222000, point.lat - pseudo_rayon / 222000],
+                                    [point.lng + pseudo_rayon / 222000, point.lat - pseudo_rayon / 222000],
+                                    [point.lng + pseudo_rayon / 222000, point.lat + pseudo_rayon / 222000],
+                                    [point.lng - pseudo_rayon / 222000, point.lat + pseudo_rayon / 222000],
+                                    [point.lng - pseudo_rayon / 222000, point.lat - pseudo_rayon / 222000]
+                                ]]);
+            const inters = turf.intersect(feature.toGeoJSON().geometry, carre);
+            if (inters && layersContainingPoint.indexOf(layerName) == -1 && exclude.indexOf(layerName) == -1) {
               layersContainingPoint.push(layerName);
             }
           });
@@ -231,11 +239,15 @@ geojsonPaths_arrondissements = [
       // Ici, j'utilise un exemple factice pour la démonstration
       var point = L.latLng( 48.8594544 , 2.3471924); // Latitude et longitude factices
       var layersContainingPoint = findLayersContainingPoint(point);
+      var layersContainingPointProche = findLayersContainingPoint(point, 100, layersContainingPoint);
 
       var resultDiv = document.getElementById('result');
       resultDiv.innerHTML = '';
       if (layersContainingPoint.length > 0) {
         var resultText = 'Le point se trouve dans les couches suivantes : ' + layersContainingPoint.join(', ');
+        if (layersContainingPointProche.length) {
+            resultText += ' ... et moins de 100 mètres des zones : ' + layersContainingPointProche.join(', ');
+        }
         resultDiv.textContent = resultText;
       } else {
         resultDiv.textContent = 'Le point ne se trouve dans aucune couche.';
