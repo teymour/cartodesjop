@@ -19,7 +19,9 @@
 
   <!-- Formulaire pour saisir l'adresse -->
   <form id="addressForm">
-    <input type="text" id="addressInput" placeholder="Entrez une adresse">
+    <input id="adresseInput" type="text" list="suggestionsList" placeholder="e.g. datalist">
+    <datalist id="suggestionsList"></datalist>
+
     <button type="submit">Trouver</button>
   </form>
 
@@ -183,7 +185,38 @@ geojsonPaths_arrondissements = [
     loadGeoJSONFiles(geojsonPaths_silt, 'gray', 1);
     loadGeoJSONFiles(geojsonPaths_arrondissements, 'black', 0);
 
-    // Fonction pour créer une case à cocher pour chaque couche GeoJSON
+    function searchAddresses() {
+        const query = input.value;
+        fetch(`https://api-adresse.data.gouv.fr/search/?lat=48.8566&lon=2.3522&q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                const addresses = data.features.map(feature => feature);
+                displayAddressesSuggestions(addresses);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la recherche d\'adresses :', error);
+            });
+    }
+
+    function displayAddressesSuggestions(addresses) {
+        const suggestionsList = document.getElementById('suggestionsList');
+        suggestionsList.innerHTML = '';
+        addresses.forEach(feature => {
+            const listItem = document.createElement('option');
+            listItem.value = feature.properties.label;
+            listItem.textContent = feature.properties.label;
+            listItem.setAttribute('data-lng', feature.geometry.coordinates[0]);
+            listItem.setAttribute('data-lat', feature.geometry.coordinates[1]);
+            suggestionsList.appendChild(listItem);
+        });
+    }
+
+    const input = document.getElementById('adresseInput');
+    input.addEventListener('input', function(event) {
+        searchAddresses();
+    });
+
+
     function createLayerCheckbox(layerName) {
       var checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
@@ -233,11 +266,10 @@ geojsonPaths_arrondissements = [
     }
 
     document.getElementById('addressForm').addEventListener('submit', function (event) {
+      searchAddresses();
       event.preventDefault();
-      var address = document.getElementById('addressInput').value;
-      // Utilisez un service de géocodage pour convertir l'adresse en coordonnées géographiques
-      // Ici, j'utilise un exemple factice pour la démonstration
-      var point = L.latLng( 48.8594544 , 2.3471924); // Latitude et longitude factices
+      var address = document.getElementById('suggestionsList').children[0];
+      var point = L.latLng( address.dataset.lat, address.dataset.lng);
       var layersContainingPoint = findLayersContainingPoint(point);
       var layersContainingPointProche = findLayersContainingPoint(point, 100, layersContainingPoint);
 
