@@ -8,12 +8,17 @@
   <link rel="stylesheet" href="./css/leaflet.css" />
   <style>
     #map {
-      height: 500px;
+      height: 600px;
     }
-    #result {
-      margin-top: 10px;
+    .visavi .card{
+        min-height: 850px;
+        margin: 20px 0;
     }
-  </style>
+    abbr {
+          text-decoration: underline dotted;
+          cursor: help;
+    }
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
@@ -21,7 +26,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav flex-grow-1 center">
           <li class="nav-item"><a class="nav-link" href="https://technopolice.fr/">
-                TECHNOPOLICE
+                TECHNOPOLICE - Paris Banlieue
               </a></li>
         </ul>
       </div>
@@ -30,11 +35,12 @@
 </nav>
 
 <main>
-<section class="py-5 text-center container">
-  <div class="row py-lg-5">
+<div class="container">
+<section class="py-2 text-center container">
+  <div class="row py-lg-2">
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">Ce qui nous attend pour les JO</h1>
-      <p class="lead text-body-secondary">Indiquer une adresse pour savoir à quoi vous préparer pour les JO</p>
+      <p class="lead text-body-secondary">Indiquer une adresse pour savoir à quoi vous attendre pour les JO :</p>
       <form id="addressForm">
         <input id="adresseInput" type="text" list="suggestionsList" placeholder="Votre adresse" class="form-control">
         <datalist id="suggestionsList"></datalist>
@@ -44,28 +50,32 @@
   </div>
 </section>
 
-<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
+<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3 visavi">
   <div class="col">
     <div class="card shadow-sm">
-        <div id="map"></div>
+        <div class="p-3">
+            <h2 class="pb-5 text-center">Carte globale des « zones JOP »</h2>
+            <div id="map" class="pb-3 pt-3"></div>
+            <p class="p-4 text-center">Vue de l'ensemble des zones activées à un moment durant les jeux olympiques et paralympiques (entre le 15 juillet et le 9 septembre 2024)</p>
+        </div>
     </div>
   </div>
 
   <div class="col">
     <div class="card shadow-sm">
         <div id="result" class="p-3">
-                <h2 id="titre">Vue globale</h2>
+                <h2 id="titre" class="pb-3">Vue globale</h2>
                 <div id="zone_silt">
-                <p><span style="background-color: black;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone Anti-terroriste</strong> : Accès totalement interdit aux véhicules mototisés et aux piétons non autorisés. Des « visites » administratives de tout lieu de la zone sont prévues par la loi SILT pour notamment saisir de données informatique (le conseil consitutionnel n'a pas autorisé la saisie de documents et d'objets).</p>
-                <p id="zone_silt_comment">10,00 % de Paris intramuros est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: black;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone Anti-terroriste</strong> : Accès totalement interdit aux véhicules mototisés et aux piétons non autorisés. Pour les piétons non munis de billet, seules les personnes accéditées d'un QRCode (cf. zone rouge) pourront accéder à ces zones. Des « visites » administratives de tout lieu de la zone sont prévues par la loi SILT pour notamment saisir de données informatique à des fins d'enquête administrative (le conseil consitutionnel n'a pas autorisé la saisie de documents et d'objets).</p>
+                <p id="zone_silt_comment">8,19 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
                 </div>
                 <div id="zone_rouge">
-                <p><span style="background-color: red;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation interdite</strong> : Accès interdit aux véhicules mototisés. Un portail web permettra de déposer une demande de dérogation (et des pièces justificatices). Si le motif est jugé légitime par la préfecture de police, un QRCode se délivré. Il permettra l'entrée du véhicule dans la zone. Ce QRCode ne permettra pas aux véhicules de passer pendant les durée des épreuves qui se dérouleront sur route.</li>
-                <p id="zone_rouge_comment">58,62 % de Paris intramuros est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: red;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation interdite</strong> : Accès interdit aux véhicules mototisés. Un portail web (ouverture prévue le 10 mai) permettra de déposer une demande de dérogation (et des pièces justificatives). Si la personne à l'origine de la demande n'est pas connue d'un des fichiers des services de renseignement et que le motif présenté et les pièces fournies sont jugées légitime par la préfecture de police, un QRCode sera délivré. Il permettra l'entrée de la personne en véhicule mototisé dans la zone. Ce QRCode ne permettra pas aux véhicules de circuler pendant les durée des épreuves qui se dérouleront sur route.</li>
+                <p id="zone_rouge_comment">63,80 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
                 </div>
                 <div id="zone_bleu">
-                <p><span style="background-color: orange;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation réglementée</strong> : Le conducteur du véhicules doit être muni d'un QRCode d'accès à la zone rouge ou justifier auprès des forces de l'ordre en charge du barrage de justifier de son besoin d’accès à la zone (accès au domicile, travail, livraison, dépannage, déménagement, rendez-vous médical, ...).</p>
-                <p id="zone_bleu_comment">65,00 % de Paris intramuros est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: orange;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation réglementée</strong> : Le conducteur du véhicules doit être muni d'un QRCode d'accès à la zone rouge ou doit justifier auprès des forces de l'ordre en charge du barrage de justifier de son besoin d’accès à la zone (accès au domicile, travail, livraison, dépannage, déménagement, rendez-vous médical, ...). La loi JO a légalisé l'usage de la survaillance par intelligence artificielle (via caméras ou drones) qui pourra être activée sur l'ensemble des zones.</p>
+                <p id="zone_bleu_comment">66,27 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
                 </div>
         </div>
     </div>
@@ -73,9 +83,41 @@
 
 </div>
 
-  <!-- Ajouter des contrôles pour les couches GeoJSON -->
-  <div id="layerControls"></div>
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card shadow-sm p-3">
+          <h2 class="pb-3">Sources</h2>
+          <p>Voici les sources utilisées pour réaliser la cartographie et les informations publiées sur cette page :</p>
+          <ul>
+              <li><a href="https://www.prefecturedepolice.interieur.gouv.fr/mission/des-jeux-securises-pour-tous/les-perimetres-de-securite-autour-des-sites-olympiques-et-paralympiques">Préfecture de police</a></li>
+              <li><a href="https://www.paris.fr/pages/perimetres-de-securite-et-circulation-pendant-les-jeux-comment-ca-marche-25203">Mairie de paris</a></li>
+              <li><a href="https://anticiperlesjeux.gouv.fr/je-minforme/carte-interactive-impacts-deplacements-ile-france">Site anticiperlesjeux.gouv.fr</a></li>
+              <li><a href="https://www.leparisien.fr/jo-paris-2024/ceremonie-douverture-des-jo-la-plate-forme-pour-entrer-dans-le-perimetre-de-securite-sera-en-ligne-le-10-mai-08-04-2024-7PHKYMLTURGMFNTZWXIKXACEUE.php">Le Parisien</a></li>
+              <li><a href="https://www.vie-publique.fr/loi/287639-jo-2024-loi-du-19-mai-2023-jeux-olympiques-et-paralympiques">La loi Olympiques sur vie-publique.fr</a>
+              <li><a href="https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-lutte-contre-le-terrorisme-loi-silt">La loi SILT sur vie-publique.fr</a>
+          </ul>
+          <h2 class="p-3">Approndir</h2>
+          <p>Voici quelques ressources pour approfondir les atteintes aux libertés individuelles lors des JO :</p>
+          <ul>
+              <li><a href="https://www.laquadrature.net/2023/01/18/non-a-la-videosurveillance-algorithmique-refusons-larticle-7-de-la-loi-olympique/">Analyse de la « Surveillance par intelligence Artificielle (VSA) » par La Quadrature du Net</a></li>
+              <li><a href="https://www.ldh-france.org/wp-content/uploads/2017/10/avis-d%C3%A9taill%C3%A9-sur-le-projet-loi-s%C3%A9curit%C3%A9-int%C3%A9rieure-et-lutte-contre-terrorisme-juillet-2017-envoy%C3%A9-aux-d%C3%A9put%C3%A9s-et-s%C3%A9nateurs.pdf">Analyse de la loi SILT par la Ligue des droits de l'Homme</a></li>
+          </ul>
+          <h2 class="p-3">Droit d'auteur</h2>
+          <p>Ce site est basé sur des données publiques issues de la Préfecture de police de Paris et d'Open Street Map. Les GeoJSON conçus pour ce site sont librement réutilisables sous licence ODBL.</p>
+          <p>Le code source de ce site est diffusé sous licence AGPL. Son code source est disponible <a href="">ici</a>. Il se base les logiciels libres sur Bootstrap, Leaflet et Turf.js.</p>
+          <p>Ce travail a été réalisé par Tangui Morlier et le groupe <a href="https://technopolice.fr/">Technopolice Paris Banlieue</a>.</p>
+      </div>
+  </div>
+</div>
 
+</div>
+<div class="container">
+</div>
+</main>
+<footer class="p-5">
+    <p class="text-center text-muted">AGPL/ODBL - Tangui Morlier - 2024</p>
+</footer>
+  <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/leaflet.js"></script>
   <script src="./js/turf.min.js"></script>
   <script>
@@ -86,115 +128,115 @@
     }).addTo(map);
 
     var geojsonLayers = {};
-    var geojsonPaths_rouge = [
-        "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_rouge.geojson",
-        "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_rouge.geojson",
-        "geojson/20240719-20240725_perimetre_CER1-JoursAvants_rouge.geojson",
-        "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_rouge.geojson",
-        "geojson/20240724-20240727_perimetre_cyclisme-clm_rouge.geojson",
-        "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_rouge.geojson",
-        "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_rouge.geojson",
-        "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_rouge.geojson",
-        "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_rouge.geojson",
-        "geojson/20240726-20240726_pdf_cer1-jj-4ep-Wye8_rouge.geojson",
-        "geojson/20240726-20240726_perimetre_CER1-JourJ_rouge.geojson",
-        "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_rouge.geojson",
-        "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_rouge.geojson",
-        "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_rouge.geojson",
-        "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_rouge.geojson",
-        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_rouge.geojson",
-        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_rouge.geojson",
-        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_rouge.geojson",
-        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_rouge.geojson",
-        "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_rouge.geojson",
-        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_rouge.geojson",
-        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_rouge.geojson",
-        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_rouge.geojson",
-        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_rouge.geojson",
-        "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-STADE-NAUTIQUE-DE-VAIRES-SUR-MARNE-SP_rouge.geojson",
-        "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_rouge.geojson",
-        "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_rouge.geojson",
-        "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_rouge.geojson",
-        "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_rouge.geojson",
-        "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_rouge.geojson",
-        "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_rouge.geojson",
-        "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_rouge.geojson",
-        "geojson/20240803-20240804_perimetre_course-en-ligne-homme_rouge.geojson",
-        "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_rouge.geojson",
-        "geojson/20240805-20240810_perimetre_CIRCULATION-DISPOSITIF-SITE-D-ESCALADE-DU-BOURGET-SP_rouge.geojson",
-        "geojson/20240810-20240811_perimetre_marathon-femme_rouge.geojson",
-        "geojson/20240810-20240811_perimetre_marathon-homme_rouge.geojson",
-        "geojson/20240810-20240811_perimetre_marathon-pour-tous_rouge.geojson",
-        "geojson/20240828-20240828_perimetre_CER3-Ceremonie-d-ouverture-Jeux-Paralympiques_rouge.geojson",
-        "geojson/20240903-20240908_perimetre_PARA-Cyclisme-fam_rouge.geojson",
-        "geojson/20240903-20240908_perimetre_PARA-MassEvent_rouge.geojson",
-        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Contre-la-Montre_rouge.geojson",
-        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J1_rouge.geojson",
-        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J2_rouge.geojson",
-        "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J3_rouge.geojson",
-        "geojson/20240908-20240908_perimetre_PARA-Marathon_rouge.geojson",
-        "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson",
-    ];
+    var geojsonPaths = {
+        "rouge": {
+            "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_rouge.geojson": "VILLAGE OLYMPIQUE",
+            "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_rouge.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240719-20240725_perimetre_CER1-JoursAvants_rouge.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_rouge.geojson": "Cyclisme",
+            "geojson/20240724-20240727_perimetre_cyclisme-clm_rouge.geojson": "Cyclisme",
+            "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_rouge.geojson": "PARC DES PRINCES",
+            "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_rouge.geojson": "STADE DE FRANCE",
+            "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_rouge.geojson": "INVALIDES",
+            "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_rouge.geojson": "ARENA PARIS SUD",
+            "geojson/20240726-20240726_pdf_cer1-jj-4ep-Wye8_rouge.geojson": "Cérémonie d'ouverture",
+            "geojson/20240726-20240726_perimetre_CER1-JourJ_rouge.geojson": "Cérémonie d'ouverture",
+            "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_rouge.geojson": "TROCADERO",
+            "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_rouge.geojson": "STADE YVES DU MANOIR",
+            "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_rouge.geojson": "CENTRE AQUATIQUE",
+            "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_rouge.geojson": "ARENA PORTE DE LA CHAPELLE",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_rouge.geojson": "ARENA PARIS NORD",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_rouge.geojson": "CHATEAU DE VERSAILLES",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_rouge.geojson": "EIFFEL CHAMP DE MARS",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_rouge.geojson": "PARIS LA DEFENSE ARENA",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_rouge.geojson": "STADE ROLAND GARROS",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_rouge.geojson": "ARENA BERCY",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_rouge.geojson": "GRAND PALAIS",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_rouge.geojson": "LA CONCORDE",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_rouge.geojson": "LCO GRX",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-STADE-NAUTIQUE-DE-VAIRES-SUR-MARNE-SP_rouge.geojson": "STADE NAUTIQUE DE VAIRES SUR MARNE",
+            "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_rouge.geojson": "COLLINE D ELANCOURT",
+            "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_rouge.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_rouge.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_rouge.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_rouge.geojson": "triathlon",
+            "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_rouge.geojson": "LE GOLF NATIONAL",
+            "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_rouge.geojson": "VELODROME NATIONAL DE SAINT QUENTIN EN YVELINES",
+            "geojson/20240803-20240804_perimetre_course-en-ligne-homme_rouge.geojson": "Course en ligne",
+            "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_rouge.geojson": "Course en ligne",
+            "geojson/20240805-20240810_perimetre_CIRCULATION-DISPOSITIF-SITE-D-ESCALADE-DU-BOURGET-SP_rouge.geojson": "SITE D ESCALADE DU BOURGET",
+            "geojson/20240810-20240811_perimetre_marathon-femme_rouge.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-homme_rouge.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-pour-tous_rouge.geojson": "Marathon",
+            "geojson/20240828-20240828_perimetre_CER3-Ceremonie-d-ouverture-Jeux-Paralympiques_rouge.geojson": "Cérémonie d'ouverture paralympique",
+            "geojson/20240903-20240908_perimetre_PARA-Cyclisme-fam_rouge.geojson": "Cyclisme",
+            "geojson/20240903-20240908_perimetre_PARA-MassEvent_rouge.geojson": "MassEvent",
+            "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Contre-la-Montre_rouge.geojson": "Cyclisme",
+            "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J1_rouge.geojson": "Cyclisme",
+            "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J2_rouge.geojson": "Cyclisme",
+            "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J3_rouge.geojson": "Cyclisme",
+            "geojson/20240908-20240908_perimetre_PARA-Marathon_rouge.geojson": "Marathon",
+            "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson": "Ceremonie de cloture des jeux paralympiques",
+        },
+        "bleu": {
+            "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson": "CENTRE AQUATIQUE",
+            "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_bleu.geojson": "VILLAGE OLYMPIQUE",
+            "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_bleu.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240719-20240725_perimetre_CER1-JoursAvants_bleu.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240724-20240727_perimetre_cyclisme-clm_bleu.geojson": "Cyclisme",
+            "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_bleu.geojson": "Cyclisme",
+            "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_bleu.geojson": "PARC DES PRINCES",
+            "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_bleu.geojson": "STADE DE FRANCE",
+            "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_bleu.geojson": "INVALIDES",
+            "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_bleu.geojson": "ARENA PARIS SUD",
+            "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_bleu.geojson": "TROCADERO",
+            "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_bleu.geojson": "STADE YVES DU MANOIR",
+            "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson": "CENTRE AQUATIQUE",
+            "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_bleu.geojson": "ARENA PORTE DE LA CHAPELLE",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_bleu.geojson": "ARENA PARIS NORD",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_bleu.geojson": "CHATEAU DE VERSAILLES",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_bleu.geojson": "EIFFEL CHAMP DE MARS",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_bleu.geojson": "PARIS LA DEFENSE ARENA",
+            "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_bleu.geojson": "STADE ROLAND GARROS",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_bleu.geojson": "ARENA BERCY",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_bleu.geojson": "GRAND PALAIS",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_bleu.geojson": "LA CONCORDE",
+            "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_bleu.geojson": "LCO GRX",
+            "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_bleu.geojson": "COLLINE D ELANCOURT",
+            "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_bleu.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_bleu.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_bleu.geojson": "triathlon",
+            "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_bleu.geojson": "triathlon",
+            "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_bleu.geojson": "LE GOLF NATIONAL",
+            "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_bleu.geojson": "VELODROME NATIONAL DE SAINT QUENTIN EN YVELINES",
+            "geojson/20240803-20240804_perimetre_course-en-ligne-homme_bleu.geojson": "Course en ligne",
+            "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson": "Course en ligne",
+            "geojson/20240810-20240811_perimetre_marathon-femme_bleu.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-homme_bleu.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon",
+    },
+    "silt": {
+        "geojson/20240726-20240726_parisien_cer-jj_silt.geojson": "Cérémonie d'ouverture",
+        "geojson/20240719-20240725_perimetre_CER1-JoursAvants_silt.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+        "geojson/20240724-20240811_presentation_sites-olympiques-vue-92-4ep-ejtY-colombes_silt.geojson": "Site olympique",
+        "geojson/20240724-20240811_presentation_sites-olympiques-vue-92-4ep-ejtY-defense_silt.geojson": "Site olympique",
+        "geojson/20240724-20240811_presentation_sites-olympiques-vue-93-4ep-am7z-circuit_silt.geojson": "Site olympique",
+        "geojson/20240724-20240811_presentation_sites-olympiques-vue-93-4ep-am7z-saintdenis_silt.geojson": "Site olympique",
+        "geojson/20240726-20240726_pdf_cer1-jj-4ep-Wye8_silt.geojson": "Site olympique",
+        "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-01-QT2t_silt.geojson": "Site olympique",
+        "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson": "Site olympique",
+        "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson": "Site olympique",
+        "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson": "Site olympique",
+        "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vue-93-4ep-am7z-circuit_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vue-93-4ep-am7z-saintdenis_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-01-QT2t_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson": "Site olympique",
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique",
 
-geojsonPaths_bleu = [
-    "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson",
-    "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_bleu.geojson",
-    "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_bleu.geojson",
-    "geojson/20240719-20240725_perimetre_CER1-JoursAvants_bleu.geojson",
-    "geojson/20240724-20240727_perimetre_cyclisme-clm_bleu.geojson",
-    "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_bleu.geojson",
-    "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_bleu.geojson",
-    "geojson/20240724-20240909_perimetre_CIRCULATION-DISPOSITIF-STADE-DE-FRANCE-SP_bleu.geojson",
-    "geojson/20240725-20240905_perimetre_CIRCULATION-DISPOSITIF-INVALIDES-SP_bleu.geojson",
-    "geojson/20240725-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-SUD-SP_bleu.geojson",
-    "geojson/20240726-20240811_perimetre_CIRCULATION-DISPOSITIF-TROCADERO-SP_bleu.geojson",
-    "geojson/20240727-20240809_perimetre_CIRCULATION-DISPOSITIF-STADE-YVES-DU-MANOIR-SP_bleu.geojson",
-    "geojson/20240727-20240810_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson",
-    "geojson/20240727-20240905_perimetre_CIRCULATION-DISPOSITIF-ARENA-PORTE-DE-LA-CHAPELLE-SP_bleu.geojson",
-    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-ARENA-PARIS-NORD-SP_bleu.geojson",
-    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-CHATEAU-DE-VERSAILLES-SP_bleu.geojson",
-    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-EIFFEL-CHAMP-DE-MARS-SP_bleu.geojson",
-    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-PARIS-LA-DEFENSE-ARENA-SP_bleu.geojson",
-    "geojson/20240727-20240907_perimetre_CIRCULATION-DISPOSITIF-STADE-ROLAND-GARROS-SP_bleu.geojson",
-    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-ARENA-BERCY-SP_bleu.geojson",
-    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-GRAND-PALAIS-SP_bleu.geojson",
-    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LA-CONCORDE-SP_bleu.geojson",
-    "geojson/20240727-20240908_perimetre_CIRCULATION-DISPOSITIF-LCO-GRX-SP_bleu.geojson",
-    "geojson/20240728-20240729_perimetre_CIRCULATION-DISPOSITIF-COLLINE-D-ELANCOURT-SP_bleu.geojson",
-    "geojson/20240728-20240805_perimetre_triathlon-fam-Cyc-Nat_bleu.geojson",
-    "geojson/20240728-20240805_perimetre_triathlon-indiv-femme_bleu.geojson",
-    "geojson/20240728-20240805_perimetre_triathlon-indiv-homme_bleu.geojson",
-    "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_bleu.geojson",
-    "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_bleu.geojson",
-    "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_bleu.geojson",
-    "geojson/20240803-20240804_perimetre_course-en-ligne-homme_bleu.geojson",
-    "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson",
-    "geojson/20240810-20240811_perimetre_marathon-femme_bleu.geojson",
-    "geojson/20240810-20240811_perimetre_marathon-homme_bleu.geojson",
-    "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson",
-];
-
-
-geojsonPaths_silt = [
-    "geojson/20240724-20240811_presentation_sites-olympiques-vue-92-4ep-ejtY-colombes_silt.geojson",
-    "geojson/20240724-20240811_presentation_sites-olympiques-vue-92-4ep-ejtY-defense_silt.geojson",
-    "geojson/20240724-20240811_presentation_sites-olympiques-vue-93-4ep-am7z-circuit_silt.geojson",
-    "geojson/20240724-20240811_presentation_sites-olympiques-vue-93-4ep-am7z-saintdenis_silt.geojson",
-    "geojson/20240726-20240726_parisien_cer-jj_silt.geojson",
-    "geojson/20240726-20240726_pdf_cer1-jj-4ep-Wye8_silt.geojson",
-    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-01-QT2t_silt.geojson",
-    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson",
-    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson",
-    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson",
-    "geojson/20240824-20240811_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vue-93-4ep-am7z-circuit_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vue-93-4ep-am7z-saintdenis_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-01-QT2t_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson",
-    "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson",
-];
+    }};
 
 geojsonPaths_arrondissements = [
     "geojson/arrondissements.geojson",
@@ -224,9 +266,9 @@ geojsonPaths_arrondissements = [
       });
     }
 
-    loadGeoJSONFiles(geojsonPaths_bleu, 'orange', 1);
-    loadGeoJSONFiles(geojsonPaths_rouge, 'red', 1);
-    loadGeoJSONFiles(geojsonPaths_silt, 'black', 1);
+    loadGeoJSONFiles(Object.keys(geojsonPaths['bleu']), 'orange', 1);
+    loadGeoJSONFiles(Object.keys(geojsonPaths['rouge']), 'red', 1);
+    loadGeoJSONFiles(Object.keys(geojsonPaths['silt']), 'black', 1);
     loadGeoJSONFiles(geojsonPaths_arrondissements, 'gray', 0);
 
     function searchAddresses() {
@@ -298,42 +340,47 @@ geojsonPaths_arrondissements = [
             "silt": {'inside': {}, 'near': {}},
             "bleu": {'inside': {}, 'near': {}}
         };
-        var vus = {};
 
-        console.log(actifs);
         ['inside', 'near'].forEach(function(proximity) {
             layersContainingPoint[proximity].forEach(function (layer){
                 infos = layer.split('_');
                 if (!infos[1]) {
                     return;
                 }
-                console.log(infos);
                 if (!actifs[infos[3]][proximity][infos[0]]) {
                     actifs[infos[3]][proximity][infos[0]] = [];
                 }
                 actifs[infos[3]][proximity][infos[0]].push(layer);
             });
         });
-        console.log(actifs);
 
         var titreDiv = document.getElementById('titre');
         titreDiv.innerHTML = 'Vue du ' + address.innerHTML;
-
+        var prev = false;
         ['silt', 'rouge', 'bleu'].forEach(function(zone) {
             comment = {"inside": "", "near": ""};
             ['inside', 'near'].forEach(function(proximity) {
                 if (Object.keys(actifs[zone][proximity]).length) {
                     nb = 0;
                     Object.keys(actifs[zone][proximity]).forEach((item) => {
-                        sources = actifs[zone][proximity][item];
+                        sources = [];
+                        actifs[zone][proximity][item].forEach((item) => {
+                            console.log(['geojson/'+item+'.geojson', geojsonPaths[zone]['geojson/'+item+'.geojson']])
+                            s = geojsonPaths[zone]['geojson/'+item+'.geojson'];
+                            if (sources.indexOf(s) === -1) {
+                                sources.push(s)
+                            }
+                        });
+
                         if (nb) {
                             comment[proximity] += " et";
                         }
                         dates = item.split('-');
+                        tooltype = 'data-bs-toggle="tooltip" title="'+sources.join(', ')+'"';
                         if (dates[0] == dates[1]) {
-                            comment[proximity] += " le "+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1');
+                            comment[proximity] += " le <abbr "+tooltype+">"+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
                         }else{
-                            comment[proximity] += " du "+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+" au "+dates[1].replace(/(....)(..)(..)/, '$3/$2/$1');
+                            comment[proximity] += " du <abbr "+tooltype+">"+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+" au "+dates[1].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
                         }
                         nb++;
                     });
@@ -342,6 +389,7 @@ geojsonPaths_arrondissements = [
             opacity = "0.5";
             html_comment = "";
             if(comment['inside'] || comment['near']) {
+                prev = true;
                 html_comment = "<strong>";
                 if(comment['inside']) {
                     html_comment += "<span style='color:red'>Vous êtes concerné⋅e par cette zone "+comment['inside']+".</span> ";
@@ -357,16 +405,29 @@ geojsonPaths_arrondissements = [
                 opacity = '1';
                 html_comment += "</strong>";
             }else{
-                html_comment = "Vous n'êtes pas concerné⋅e par cette zone";
+                if (prev) {
+                    html_comment = "Vous êtes également concerné⋅e par les règles de cette zone.";
+                    opacity = '1';
+                }else{
+                    html_comment = "Vous n'êtes pas concerné⋅e par cette zone pendant l'activation de la précédente.";
+                }
             }
             document.getElementById('zone_'+zone+'_comment').innerHTML = html_comment;
             document.getElementById('zone_'+zone).style = "opacity:"+opacity;
         });
 
+        updateToolkit()
         L.marker(point).addTo(map);
         map.setView(point, 13);
     });
+    function updateToolkit() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+          return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    }
+    updateToolkit();
+    searchAddresses();
   </script>
-</main>
 </body>
 </html>
