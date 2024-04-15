@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carte Leaflet avec GeoJSON</title>
+  <title>La carto des JO</title>
   <link href="./css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/leaflet.css" />
   <style>
@@ -103,9 +103,10 @@
               <li><a href="https://www.ldh-france.org/wp-content/uploads/2017/10/avis-d%C3%A9taill%C3%A9-sur-le-projet-loi-s%C3%A9curit%C3%A9-int%C3%A9rieure-et-lutte-contre-terrorisme-juillet-2017-envoy%C3%A9-aux-d%C3%A9put%C3%A9s-et-s%C3%A9nateurs.pdf">Analyse de la loi SILT par la Ligue des droits de l'Homme</a></li>
           </ul>
           <h2 class="p-3">Droit d'auteur</h2>
-          <p>Ce site est basé sur des données publiques issues de la Préfecture de police de Paris et d'Open Street Map. Les GeoJSON conçus pour ce site sont librement réutilisables sous licence ODBL.</p>
-          <p>Le code source de ce site est diffusé sous licence AGPL. Son code source est disponible <a href="">ici</a>. Il se base les logiciels libres sur Bootstrap, Leaflet et Turf.js.</p>
-          <p>Ce travail a été réalisé par Tangui Morlier et le groupe <a href="https://technopolice.fr/">Technopolice Paris Banlieue</a>.</p>
+          <p>Ce site est basé sur des données publiques issues de la <a href="https://www.prefecturedepolice.interieur.gouv.fr/">Préfecture de police de Paris</a> et d'<a href="https://www.openstreetmap.org/">Open Street Map</a>. Les GeoJSON conçus pour ce site sont librement réutilisables sous <a href="https://opendatacommons.org/licenses/odbl/">licence ODBL</a>. Ils sont téléchargeables <a href="./geojson/">ici</a>.</p>
+          <p>Le code source de ce site est diffusé sous <a href="https://www.gnu.org/licenses/agpl-3.0.fr.html">licence AGPL</a>. Son code source est disponible <a href="https://github.com/teymour/cartodesjop/">ici</a>. Il se base les logiciels libres sur <a href="https://getbootstrap.com/">Bootstrap</a>, <a href="https://leafletjs.com/">Leaflet</a> et <a href="https://turfjs.org/">Turf.js</a>.</p>
+          <p>La résolution d'adresse est possible grace au service public <a href="https://adresse.data.gouv.fr/">adresse.data.gouv.fr</a>, et le fond de carte OSM, grace à <a href="https://stadiamaps.com/">stadia maps</a>.</p>
+          <p>Ce travail a été réalisé par Tangui Morlier avec l'aide du groupe <a href="https://technopolice.fr/">Technopolice Paris Banlieue</a>.</p>
       </div>
   </div>
 </div>
@@ -115,7 +116,7 @@
 </div>
 </main>
 <footer class="p-5">
-    <p class="text-center text-muted">AGPL/ODBL - Tangui Morlier - 2024</p>
+    <p class="text-center text-muted"><a href="https://www.gnu.org/licenses/agpl-3.0.fr.html">Affero GPL</a>/<a href="https://opendatacommons.org/licenses/odbl/">ODBL</a> - Tangui Morlier - 2024</p>
 </footer>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/leaflet.js"></script>
@@ -124,7 +125,7 @@
     var map = L.map('map').setView([48.8566, 2.3522], 12);
 
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://www.prefecturedepolice.interieur.gouv.fr/">PPP</a> & T. Morlier'
     }).addTo(map);
 
     var geojsonLayers = {};
