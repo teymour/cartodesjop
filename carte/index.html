@@ -274,6 +274,9 @@ geojsonPaths_arrondissements = [
 
     function searchAddresses() {
         const query = input.value;
+        if (query.length < 5) {
+            return;
+        }
         fetch(`https://api-adresse.data.gouv.fr/search/?lat=48.8566&lon=2.3522&q=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
@@ -427,7 +430,19 @@ geojsonPaths_arrondissements = [
           return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     }
+    function orderLayers() {
+        geojsonPaths['bleu'].forEach((item) => {
+            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
+            geojsonLayers[layerName].bringToBack()
+        });
+        geojsonPaths['silt'].forEach((item) => {
+            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
+            geojsonLayers[layerName].bringToFront();
+        });
+        geojsonLayers['arrondissement'].bringToFront();
+    }
     updateToolkit();
+    orderLayers();
     searchAddresses();
   </script>
 </body>
