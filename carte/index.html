@@ -261,8 +261,7 @@ geojsonPaths_arrondissements = [
         fetch(path)
           .then(response => response.json())
           .then(data => {
-            var layerName = path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
-            addGeoJSONToMap(data, layerName, color, opacity);
+            addGeoJSONToMap(data, path, color, opacity);
           });
       });
     }
@@ -351,10 +350,12 @@ geojsonPaths_arrondissements = [
                 if (!infos[1]) {
                     return;
                 }
-                if (!actifs[infos[3]][proximity][infos[0]]) {
-                    actifs[infos[3]][proximity][infos[0]] = [];
+                zone = infos[3].replace('.geojson', '');
+                dates = infos[0].replace('geojson/', '');
+                if (!actifs[zone][proximity][dates]) {
+                    actifs[zone][proximity][dates] = [];
                 }
-                actifs[infos[3]][proximity][infos[0]].push(layer);
+                actifs[zone][proximity][dates].push(layer);
             });
         });
 
@@ -420,34 +421,39 @@ geojsonPaths_arrondissements = [
             document.getElementById('zone_'+zone).style = "opacity:"+opacity;
         });
 
-        updateToolkit()
+        updateTooltip();
         L.marker(point).addTo(map);
         map.setView(point, 13);
     });
-    function updateToolkit() {
+    function updateTooltip() {
+        console.log('tooltip')
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     }
     function orderLayers() {
-        geojsonPaths['rouge'].forEach((item) => {
-            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
-            geojsonLayers[layerName].bringToBack()
-        });
-        geojsonPaths['bleu'].forEach((item) => {
-            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
-            geojsonLayers[layerName].bringToBack()
-        });
-        geojsonPaths['silt'].forEach((item) => {
-            var layerName = item.substring(item.lastIndexOf('/') + 1, item.lastIndexOf('.'));
+        for(var layerName in geojsonPaths['rouge']) {
+            geojsonLayers[layerName].bringToBack();
+        }
+        for(var layerName in geojsonPaths['bleu']) {
+            geojsonLayers[layerName].bringToBack();
+        }
+        for(var layerName in geojsonPaths['silt']) {
             geojsonLayers[layerName].bringToFront();
-        });
-        geojsonLayers['arrondissement'].bringToFront();
+        }
+        geojsonLayers['geojson/arrondissements.geojson'].bringToFront();
     }
-    updateToolkit();
-    orderLayers();
-    searchAddresses();
+    function loaded() {
+        if (! geojsonLayers['geojson/arrondissements.geojson']) {
+            window.setTimeout(loaded, 100);
+            return
+        }
+        updateTooltip();
+        orderLayers();
+        searchAddresses();
+    }
+    window.setTimeout(loaded, 200);
   </script>
 </body>
 </html>
