@@ -427,11 +427,16 @@ geojsonPaths_arrondissements = [
         });
 
         updateTooltip();
-        L.marker(point).addTo(map);
+        if (marker) {
+            map.removeLayer(marker)
+        }
+        marker = L.marker(point)
+        map.addLayer(marker);
         map.setView(point, 13);
         document.getElementById("explications").scrollIntoView();
         console.log('scroll');
     }
+    var marker;
     function updateTooltip() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -457,7 +462,6 @@ geojsonPaths_arrondissements = [
         }
         updateTooltip();
         orderLayers();
-        searchAddresses();
     }
     window.setTimeout(loaded, 100);
   </script>
