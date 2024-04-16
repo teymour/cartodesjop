@@ -370,8 +370,7 @@ geojsonPaths_arrondissements = [
                     Object.keys(actifs[zone][proximity]).forEach((item) => {
                         sources = [];
                         actifs[zone][proximity][item].forEach((item) => {
-                            console.log(['geojson/'+item+'.geojson', geojsonPaths[zone]['geojson/'+item+'.geojson']])
-                            s = geojsonPaths[zone]['geojson/'+item+'.geojson'];
+                            s = geojsonPaths[zone][item];
                             if (sources.indexOf(s) === -1) {
                                 sources.push(s)
                             }
@@ -426,7 +425,6 @@ geojsonPaths_arrondissements = [
         map.setView(point, 13);
     });
     function updateTooltip() {
-        console.log('tooltip')
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -447,13 +445,13 @@ geojsonPaths_arrondissements = [
     function loaded() {
         if (! geojsonLayers['geojson/arrondissements.geojson']) {
             window.setTimeout(loaded, 100);
-            return
+            return;
         }
         updateTooltip();
         orderLayers();
         searchAddresses();
     }
-    window.setTimeout(loaded, 200);
+    window.setTimeout(loaded, 100);
   </script>
 </body>
 </html>
