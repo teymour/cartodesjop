@@ -328,10 +328,16 @@ geojsonPaths_arrondissements = [
       }
       return layersContainingPoint;
     }
-
     document.getElementById('addressForm').addEventListener('submit', function (event) {
-        searchAddresses();
         event.preventDefault();
+        searchAddresses();
+        setTimeout(addressSubmit, 100);
+    });
+    function addressSubmit() {
+        if (!document.getElementById('suggestionsList').children.length) {
+            setTimeout(addressSubmit, 100);
+            return;
+        }
         var address = document.getElementById('suggestionsList').children[0];
         var point = L.latLng( address.dataset.lat, address.dataset.lng);
         var layersContainingPoint = { "inside": [], "near": []}
@@ -425,7 +431,7 @@ geojsonPaths_arrondissements = [
         map.setView(point, 13);
         document.getElementById("explications").scrollIntoView();
         console.log('scroll');
-    });
+    }
     function updateTooltip() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
