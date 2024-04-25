@@ -458,7 +458,7 @@ geojsonPaths_arrondissements = [
         geojsonLayers['geojson/arrondissements.geojson'].bringToFront();
     }
     function loaded() {
-        if (! geojsonLayers['geojson/arrondissements.geojson']) {
+        if (Object.keys(geojsonLayers) != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length ) {
             window.setTimeout(loaded, 100);
             return;
         }
