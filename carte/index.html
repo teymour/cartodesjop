@@ -185,7 +185,7 @@
             "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J2_rouge.geojson": "Cyclisme",
             "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J3_rouge.geojson": "Cyclisme",
             "geojson/20240908-20240908_perimetre_PARA-Marathon_rouge.geojson": "Marathon",
-            "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson": "Ceremonie de cloture des jeux paralympiques",
+            "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson": "Ceremonie de cloture des jeux paralympiques"
         },
         "bleu": {
             "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson": "CENTRE AQUATIQUE",
@@ -222,7 +222,7 @@
             "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson": "Course en ligne",
             "geojson/20240810-20240811_perimetre_marathon-femme_bleu.geojson": "Marathon",
             "geojson/20240810-20240811_perimetre_marathon-homme_bleu.geojson": "Marathon",
-            "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon"
     },
     "silt": {
         "geojson/20240719-20240725_perimetre_CER1-JoursAvants_silt.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
@@ -243,8 +243,7 @@
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson": "Site olympique",
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson": "Site olympique",
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson": "Site olympique",
-        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique",
-
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique"
     }};
 
 geojsonPaths_arrondissements = [
@@ -468,13 +467,26 @@ geojsonPaths_arrondissements = [
         geojsonLayers['geojson/arrondissements.geojson'].bringToFront();
     }
     function loaded() {
-        if (Object.keys(geojsonLayers) != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length ) {
+        if (Object.keys(geojsonLayers).length != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length + 1) {
+            console.log(['wrong nb layers']);
+            window.setTimeout(loaded, 250);
+            return;
+        }
+        var layerName;
+        try {
+            ['silt', 'rouge', 'bleu'].forEach(function(zone) {
+                for(layerName in Object.keys(geojsonPaths[zone])) {
+                    geojsonLayers[layerName];
+                }
+            })
+        }catch (e) {
+            console.log(['layer not loaded yet', layerName, e]);
             window.setTimeout(loaded, 250);
             return;
         }
         updateTooltipAndOrder();
     }
-    window.setTimeout(loaded, 100);
+    loaded();
   </script>
 </body>
 </html>
