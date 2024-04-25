@@ -436,7 +436,7 @@ geojsonPaths_arrondissements = [
         });
         document.getElementById('zone_blanche_comment').innerHTML = "<strong>Comme tous les habitants d'un département accueillant les jeux, vous êtes concerné par cette zone.</strong>";
 
-        updateTooltip();
+        updateTooltipAndOrder();
         if (marker) {
             map.removeLayer(marker)
         }
@@ -444,14 +444,14 @@ geojsonPaths_arrondissements = [
         map.addLayer(marker);
         map.setView(point, 13);
         document.getElementById("explications").scrollIntoView();
-        console.log('scroll');
     }
     var marker;
-    function updateTooltip() {
+    function updateTooltipAndOrder() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+        orderLayers();
     }
     function orderLayers() {
         for(var layerName in geojsonPaths['rouge']) {
@@ -467,11 +467,10 @@ geojsonPaths_arrondissements = [
     }
     function loaded() {
         if (Object.keys(geojsonLayers) != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length ) {
-            window.setTimeout(loaded, 100);
+            window.setTimeout(loaded, 250);
             return;
         }
-        updateTooltip();
-        orderLayers();
+        updateTooltipAndOrder();
     }
     window.setTimeout(loaded, 100);
   </script>
