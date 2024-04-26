@@ -9,10 +9,10 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <style>
     #map {
-      height: 600px;
+      height: 700px;
     }
     .visavi .card{
-        min-height: 850px;
+        min-height: 1000px;
         margin: 20px 0;
     }
     abbr {
@@ -22,14 +22,10 @@
 </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+<nav class="navbar navbar-expand-md bg-dark border-bottom" data-bs-theme="dark">
   <div class="container">
-      <div class="offcanvas-body">
-        <ul class="navbar-nav flex-grow-1 center">
-          <li class="nav-item"><a class="nav-link" href="https://technopolice.fr/">
-                TECHNOPOLICE - Paris Banlieue
-              </a></li>
-        </ul>
+      <div class="offcanvas-body text-white-50">
+          <a href="https://technopolice.fr/" class="text-white-50">TECHNOPOLICE - Paris Banlieue</a> / <a class="text-white-50" href="https://cartodesjo.fr/">Carto des JO</a>
       </div>
     </div>
   </div>
@@ -40,8 +36,9 @@
 <section class="py-2 text-center container">
   <div class="row py-lg-2">
     <div class="col-lg-6 col-md-8 mx-auto">
-      <h1 class="fw-light">Ce qui nous attend pour les JO</h1>
-      <p class="lead text-body-secondary">Indiquer une adresse pour savoir à quoi vous attendre pour les JO :</p>
+      <h1>Carto des JO</h1>
+      <h2 class="fw-light">ce qui nous attend pour les JO</h1>
+      <p class="lead text-body-secondary">Indiquer une adresse pour savoir à quoi vous préparer pour les JO :</p>
       <form id="addressForm">
         <input id="adresseInput" type="text" list="suggestionsList" placeholder="Votre adresse" class="form-control">
         <datalist id="suggestionsList"></datalist>
@@ -67,16 +64,22 @@
         <div id="result" class="p-3">
                 <h2 id="titre" class="pb-3">Vue globale</h2>
                 <div id="zone_silt">
-                <p><span style="background-color: black;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone Anti-terroriste</strong> : Accès totalement interdit aux véhicules motorisés et aux piétons non autorisés. Pour les piétons non munis de billet, seules les personnes accéditées d'un QRCode (cf. zone rouge) pourront accéder à ces zones. Des « visites » administratives de tout lieu de la zone sont prévues par la loi SILT pour notamment saisir de données informatique à des fins d'enquête administrative (le conseil consitutionnel n'a pas autorisé la saisie de documents et d'objets).</p>
-                <p id="zone_silt_comment">8,19 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: black;  border: 2px solid black;"> &nbsp; &nbsp; &nbsp; </span><span class="zone_silt"> &nbsp; <strong>Zone Anti-terroriste</strong> : Accès totalement interdit piétons comme véhicules. Pour les piétons non munis de billet, seules les personnes accréditées d'un QRCode (cf. zone rouge) pourront accéder à ces zones. Des « visites » administratives de tout lieu de la zone sont prévues par la loi SILT pour notamment saisir des données informatiques à des fins d'enquête administrative.</span></p>
+                <p id="zone_silt_comment" class="zone_silt">8,19 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
                 </div>
                 <div id="zone_rouge">
-                <p><span style="background-color: red;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation interdite</strong> : Accès interdit aux véhicules motorisés. Un portail web (ouverture prévue le 10 mai) permettra de déposer une demande de dérogation (et des pièces justificatives). Si la personne à l'origine de la demande n'est pas connue d'un des fichiers des services de renseignement et que le motif présenté et les pièces fournies sont jugées légitimes par la préfecture de police, un QRCode sera délivré. Il permettra l'entrée de la personne en véhicule motorisé dans la zone. Ce QRCode ne permettra pas aux véhicules de circuler pendant les durée des épreuves qui se dérouleront sur route.</li>
-                <p id="zone_rouge_comment">63,80 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: red; border: 2px solid red;"> &nbsp; &nbsp; &nbsp; </span><span class="zone_rouge"> &nbsp; <strong>Zone de circulation interdite</strong> : Accès interdit aux véhicules motorisés. Un portail web (ouverture prévue le 10 mai) permettra de déposer une demande de dérogation (et des pièces justificatives). Si la personne à l'origine de la demande n'est pas connue d'un des fichiers des services de renseignement et que le motif présenté et les pièces fournies sont jugées légitimes par la préfecture de police, un QRCode sera délivré. Il permettra l'entrée de la personne en véhicule motorisé dans la zone. Ce QRCode ne permettra pas aux véhicules de circuler pendant les durée des épreuves qui se dérouleront sur route. Les stationnements sur la voie publique seront peu ou pas possibles.</span></p>
+                <p id="zone_rouge_comment" class="zone_rouge">63,80 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
                 </div>
                 <div id="zone_bleu">
-                <p><span style="background-color: orange;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone de circulation réglementée</strong> : Le conducteur du véhicule doit être muni d'un QRCode d'accès à la zone rouge ou doit justifier auprès des forces de l'ordre en charge du barrage de justifier de son besoin d’accès à la zone (accès au domicile, travail, livraison, dépannage, déménagement, rendez-vous médical, ...). La loi JO a légalisé l'usage de la survaillance par intelligence artificielle (via caméras ou drones) qui pourra être activée sur l'ensemble des zones.</p>
-                <p id="zone_bleu_comment">66,27 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                <p><span style="background-color: orange; border: 2px solid orange;"> &nbsp; &nbsp; &nbsp; </span><span class="zone_bleu"> &nbsp; <strong>Zone de circulation réglementée</strong> : Le conducteur du véhicules doit être muni d'un QRCode d'accès à la zone rouge ou doit justifier auprès des forces de l'ordre en charge du barrage de son besoin d’accès à la zone (accès au domicile, travail, livraison, dépannage, déménagement, rendez-vous médical, ...). Traverser la zone ne sera pas possible.</span></p>
+                <p id="zone_bleu_comment" class="zone_bleu">66,27 % de Paris est concerné par cette zone à un moment des Jeux olympiques et paralympiques.</p>
+                </div>
+                <div id="zone_blanche">
+                <p><span style="background-color: white; border: 2px solid gray;"> &nbsp; &nbsp; &nbsp; </span> &nbsp; <strong>Zone sans restriction préalable</strong> : La préfecture de police n'a pas annoncé de restriction sur cette zone mais elle peut prendre à tout moment un arrêté « ciblé » qui lui permet d'activer des restrictions mises oeuvres dans les autres zones.
+                <br/>De plus, la loi JO a légalisé l'usage de la surveillance par intelligence artificielle (via caméras ou drones) qui pourra être activée sur l'ensemble des zones.
+                </p>
+                <p id="zone_blanche_comment">100 % de Paris est concerné par cette zone pendant les Jeux olympiques et paralympiques.</p>
                 </div>
         </div>
     </div>
@@ -90,23 +93,24 @@
           <h2 class="pb-3">Sources</h2>
           <p>Voici les sources utilisées pour réaliser la cartographie et les informations publiées sur cette page :</p>
           <ul>
-              <li><a href="https://www.prefecturedepolice.interieur.gouv.fr/mission/des-jeux-securises-pour-tous/les-perimetres-de-securite-autour-des-sites-olympiques-et-paralympiques">Préfecture de police</a></li>
-              <li><a href="https://www.paris.fr/pages/perimetres-de-securite-et-circulation-pendant-les-jeux-comment-ca-marche-25203">Mairie de paris</a></li>
-              <li><a href="https://anticiperlesjeux.gouv.fr/je-minforme/carte-interactive-impacts-deplacements-ile-france">Site anticiperlesjeux.gouv.fr</a></li>
-              <li><a href="https://www.leparisien.fr/jo-paris-2024/ceremonie-douverture-des-jo-la-plate-forme-pour-entrer-dans-le-perimetre-de-securite-sera-en-ligne-le-10-mai-08-04-2024-7PHKYMLTURGMFNTZWXIKXACEUE.php">Le Parisien</a></li>
-              <li><a href="https://www.vie-publique.fr/loi/287639-jo-2024-loi-du-19-mai-2023-jeux-olympiques-et-paralympiques">La loi Olympiques sur vie-publique.fr</a>
-              <li><a href="https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-lutte-contre-le-terrorisme-loi-silt">La loi SILT sur vie-publique.fr</a>
+              <li><a href="https://www.prefecturedepolice.interieur.gouv.fr/mission/des-jeux-securises-pour-tous/les-perimetres-de-securite-autour-des-sites-olympiques-et-paralympiques">Les périmètres vus par la Préfecture de police</a></li>
+              <li><a href="https://www.paris.fr/pages/perimetres-de-securite-et-circulation-pendant-les-jeux-comment-ca-marche-25203">Les périmètres par la Mairie de paris</a></li>
+              <li><a href="https://www.prefecturedepolice.interieur.gouv.fr/sites/default/files/Documents/VD_%20Tableau%20d%C3%A9rogations%20acc%C3%A8s%20aux%20sites%20durant%20jop%20-%20hors%20CER.pdf">Tableau des dérogations (hors cérémonie et sa préparation)</a></li>
+              <li><a href="https://anticiperlesjeux.gouv.fr/je-minforme/carte-interactive-impacts-deplacements-ile-france">Carte du site anticiperlesjeux.gouv.fr</a></li>
+              <li><a href="https://www.leparisien.fr/jo-paris-2024/ceremonie-douverture-des-jo-la-plate-forme-pour-entrer-dans-le-perimetre-de-securite-sera-en-ligne-le-10-mai-08-04-2024-7PHKYMLTURGMFNTZWXIKXACEUE.php">Prise de parole du ministre de l’Intérieur au Parisien</a></li>
+              <li><a href="https://www.vie-publique.fr/loi/287639-jo-2024-loi-du-19-mai-2023-jeux-olympiques-et-paralympiques">Loi Olympiques sur vie-publique.fr</a>
+              <li><a href="https://www.vie-publique.fr/loi/20775-loi-securite-interieure-et-lutte-contre-le-terrorisme-loi-silt">Loi SILT sur vie-publique.fr</a>
           </ul>
-          <h2 class="p-3">Approndir</h2>
+          <h2 class="py-3">Approndir</h2>
           <p>Voici quelques ressources pour approfondir les atteintes aux libertés individuelles lors des JO :</p>
           <ul>
               <li><a href="https://www.laquadrature.net/2023/01/18/non-a-la-videosurveillance-algorithmique-refusons-larticle-7-de-la-loi-olympique/">Analyse de la « Surveillance par intelligence Artificielle (VSA) » par La Quadrature du Net</a></li>
               <li><a href="https://www.ldh-france.org/wp-content/uploads/2017/10/avis-d%C3%A9taill%C3%A9-sur-le-projet-loi-s%C3%A9curit%C3%A9-int%C3%A9rieure-et-lutte-contre-terrorisme-juillet-2017-envoy%C3%A9-aux-d%C3%A9put%C3%A9s-et-s%C3%A9nateurs.pdf">Analyse de la loi SILT par la Ligue des droits de l'Homme</a></li>
           </ul>
-          <h2 class="p-3">Droit d'auteur</h2>
+          <h2 class="py-3">Crédits</h2>
           <p>Ce site est basé sur des données publiques issues de la <a href="https://www.prefecturedepolice.interieur.gouv.fr/">Préfecture de police de Paris</a> et d'<a href="https://www.openstreetmap.org/">Open Street Map</a>. Les GeoJSON conçus pour ce site sont librement réutilisables sous <a href="https://opendatacommons.org/licenses/odbl/">licence ODBL</a>. Ils sont téléchargeables <a href="./geojson/">ici</a>.</p>
-          <p>Le code source de ce site est diffusé sous <a href="https://www.gnu.org/licenses/agpl-3.0.fr.html">licence AGPL</a>. Son code source est disponible <a href="https://github.com/teymour/cartodesjop/">ici</a>. Il se base les logiciels libres sur <a href="https://getbootstrap.com/">Bootstrap</a>, <a href="https://leafletjs.com/">Leaflet</a> et <a href="https://turfjs.org/">Turf.js</a>.</p>
-          <p>La résolution d'adresse est possible grace au service public <a href="https://adresse.data.gouv.fr/">adresse.data.gouv.fr</a>, et le fond de carte OSM, grace à <a href="https://stadiamaps.com/">stadia maps</a>.</p>
+          <p>Le code source de ce site est diffusé sous <a href="https://www.gnu.org/licenses/agpl-3.0.fr.html">licence AGPL</a>. Son code source est disponible <a href="https://github.com/teymour/cartodesjop/">ici</a>. Il se base sur les logiciels libres <a href="https://getbootstrap.com/">Bootstrap</a>, <a href="https://leafletjs.com/">Leaflet</a> et <a href="https://turfjs.org/">Turf.js</a>.</p>
+          <p>La résolution d'adresse est possible grace au service public <a href="https://adresse.data.gouv.fr/">adresse.data.gouv.fr</a>, et le fond de carte <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, grace à <a href="https://stadiamaps.com/">stadia maps</a> et <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>.</p>
           <p>Ce travail a été réalisé par Tangui Morlier avec l'aide du groupe <a href="https://technopolice.fr/">Technopolice Paris Banlieue</a>.</p>
       </div>
   </div>
@@ -123,18 +127,18 @@
   <script src="./js/leaflet.js"></script>
   <script src="./js/turf.min.js"></script>
   <script>
-    var map = L.map('map').setView([48.8566, 2.3522], 12);
+    var map = L.map('map').setView([48.8695866, 2.3541869], 12);
 
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://www.prefecturedepolice.interieur.gouv.fr/">PPP</a> & T. Morlier'
+    L.tileLayer('https://tiles-eu.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>, <a href="https://www.prefecturedepolice.interieur.gouv.fr/">PPP</a> & T. Morlier'
     }).addTo(map);
 
     var geojsonLayers = {};
     var geojsonPaths = {
         "rouge": {
             "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_rouge.geojson": "VILLAGE OLYMPIQUE",
-            "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_rouge.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
-            "geojson/20240719-20240725_perimetre_CER1-JoursAvants_rouge.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240718-20240725_pdf_cer1-j8j1-4ep-LOYL_rouge.geojson": "Préparation de la cérémonie d'ouverture",
+            "geojson/20240718-20240725_perimetre_CER1-JoursAvants_rouge.geojson": "Préparation de la cérémonie d'ouverture",
             "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_rouge.geojson": "Cyclisme (course et familiarisation)",
             "geojson/20240724-20240727_perimetre_cyclisme-clm_rouge.geojson": "Cyclisme (course et familiarisation)",
             "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_rouge.geojson": "PARC DES PRINCES",
@@ -179,13 +183,13 @@
             "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J2_rouge.geojson": "Cyclisme",
             "geojson/20240904-20240907_perimetre_PARA-Cyclisme-Course-sur-route-J3_rouge.geojson": "Cyclisme",
             "geojson/20240908-20240908_perimetre_PARA-Marathon_rouge.geojson": "Marathon",
-            "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson": "Ceremonie de cloture des jeux paralympiques",
+            "geojson/20240908-20240909_perimetre_CER4-Ceremonie-de-cloture-des-jeux-paralympiques_rouge.geojson": "Ceremonie de cloture des jeux paralympiques"
         },
         "bleu": {
             "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-CENTRE-AQUATIQUE-SP_bleu.geojson": "CENTRE AQUATIQUE",
             "geojson/20240715-20240910_perimetre_CIRCULATION-DISPOSITIF-VILLAGE-OLYMPIQUE-SP_bleu.geojson": "VILLAGE OLYMPIQUE",
-            "geojson/20240719-20240725_pdf_cer1-j8j1-4ep-LOYL_bleu.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
-            "geojson/20240719-20240725_perimetre_CER1-JoursAvants_bleu.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+            "geojson/20240718-20240725_pdf_cer1-j8j1-4ep-LOYL_bleu.geojson": "Préparation de la cérémonie d'ouverture",
+            "geojson/20240718-20240725_perimetre_CER1-JoursAvants_bleu.geojson": "Préparation de la cérémonie d'ouverture",
             "geojson/20240724-20240727_perimetre_cyclisme-clm_bleu.geojson": "Cyclisme",
             "geojson/20240724-20240727_perimetre_cyclisme-clm-fam_bleu.geojson": "Cyclisme",
             "geojson/20240724-20240810_perimetre_CIRCULATION-DISPOSITIF-PARC-DES-PRINCES-SP_bleu.geojson": "PARC DES PRINCES",
@@ -216,10 +220,10 @@
             "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson": "Course en ligne",
             "geojson/20240810-20240811_perimetre_marathon-femme_bleu.geojson": "Marathon",
             "geojson/20240810-20240811_perimetre_marathon-homme_bleu.geojson": "Marathon",
-            "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon",
+            "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon"
     },
     "silt": {
-        "geojson/20240719-20240725_perimetre_CER1-JoursAvants_silt.geojson": "Préparation de la cérémonie d'ouverture (activée environ une semaine avant)",
+        "geojson/20240718-20240725_perimetre_CER1-JoursAvants_silt.geojson": "Préparation de la cérémonie d'ouverture",
         "geojson/20240726-20240726_parisien_cer-jj_silt.geojson": "Cérémonie d'ouverture",
         "geojson/20240726-20240726_pdf_cer1-jj-4ep-Wye8_silt.geojson": "Cérémonie d'ouverture",
         "geojson/20240724-20240811_presentation_sites-olympiques-vue-92-4ep-ejtY-colombes_silt.geojson": "Site olympique",
@@ -237,8 +241,7 @@
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-02-0l7u_silt.geojson": "Site olympique",
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-03-gfyW_silt.geojson": "Site olympique",
         "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-04-jYaC_silt.geojson": "Site olympique",
-        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique",
-
+        "geojson/20240828-20240908_presentation_sites-olympiques-vues-paris-4ep-05-royF_silt.geojson": "Site olympique"
     }};
 
 geojsonPaths_arrondissements = [
@@ -425,10 +428,14 @@ geojsonPaths_arrondissements = [
                 }
             }
             document.getElementById('zone_'+zone+'_comment').innerHTML = html_comment;
-            document.getElementById('zone_'+zone).style = "opacity:"+opacity;
+            classes = document.getElementsByClassName('zone_'+zone);
+            for (let i = 0; i < classes.length; i++) {
+                classes[i].style = "opacity:"+opacity;
+            }
         });
+        document.getElementById('zone_blanche_comment').innerHTML = "<strong>Comme tous les habitants d'un département accueillant les jeux, vous êtes concerné par cette zone.</strong>";
 
-        updateTooltip();
+        updateTooltipAndOrder();
         if (marker) {
             map.removeLayer(marker)
         }
@@ -436,14 +443,14 @@ geojsonPaths_arrondissements = [
         map.addLayer(marker);
         map.setView(point, 13);
         document.getElementById("explications").scrollIntoView();
-        console.log('scroll');
     }
     var marker;
-    function updateTooltip() {
+    function updateTooltipAndOrder() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+        orderLayers();
     }
     function orderLayers() {
         for(var layerName in geojsonPaths['rouge']) {
@@ -458,14 +465,26 @@ geojsonPaths_arrondissements = [
         geojsonLayers['geojson/arrondissements.geojson'].bringToFront();
     }
     function loaded() {
-        if (Object.keys(geojsonLayers) != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length ) {
-            window.setTimeout(loaded, 100);
+        if (Object.keys(geojsonLayers).length != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length + 1) {
+            console.log(['wrong nb layers']);
+            window.setTimeout(loaded, 250);
             return;
         }
-        updateTooltip();
-        orderLayers();
+        var layerName;
+        try {
+            ['silt', 'rouge', 'bleu'].forEach(function(zone) {
+                for(layerName in Object.keys(geojsonPaths[zone])) {
+                    geojsonLayers[layerName];
+                }
+            })
+        }catch (e) {
+            console.log(['layer not loaded yet', layerName, e]);
+            window.setTimeout(loaded, 250);
+            return;
+        }
+        updateTooltipAndOrder();
     }
-    window.setTimeout(loaded, 100);
+    loaded();
   </script>
 </body>
 </html>
