@@ -427,10 +427,9 @@ geojsonPaths_arrondissements = [
                 }
             })
             opacity = "0.5";
-            html_comment = "";
+            html_comment = "<strong>";
             if(comment['inside'] || comment['near']) {
                 prev = true;
-                html_comment = "<strong>";
                 if(comment['inside']) {
                     html_comment += "<span style='color:red'>Vous êtes concerné⋅e par cette zone "+comment['inside']+".</span> ";
                 }
@@ -443,15 +442,15 @@ geojsonPaths_arrondissements = [
                     html_comment += " concerné⋅e.";
                 }
                 opacity = '1';
-                html_comment += "</strong>";
             }else{
                 if (prev) {
-                    html_comment = "Ayant une autre zone active, vous êtes également concerné⋅e par les règles de cette zone pour les même dates.";
+                    html_comment += "Ayant une autre zone active, vous êtes également concerné⋅e par les règles de cette zone pour les même dates.";
                     opacity = '1';
                 }else{
-                    html_comment = "Vous n'êtes pas concerné⋅e par cette zone.";
+                    html_comment += "Vous n'êtes pas concerné⋅e par cette zone.";
                 }
             }
+            html_comment += "</strong>";
             document.getElementById('zone_'+zone+'_comment').innerHTML = html_comment;
             classes = document.getElementsByClassName('zone_'+zone);
             for (let i = 0; i < classes.length; i++) {
