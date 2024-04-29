@@ -443,6 +443,7 @@ geojsonPaths_arrondissements = [
         marker = L.marker(point)
         map.addLayer(marker);
         map.setView(point, 13);
+        document.getElementById('adresseInput').blur();
         document.getElementById("explications").scrollIntoView();
     }
     var marker;
