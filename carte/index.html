@@ -67,9 +67,12 @@
   <div class="col">
     <div class="card shadow-sm">
         <div class="p-3">
-            <h2 class="pb-5 text-center">Carte globale des «&nbsp;zones&nbsp;JO&nbsp;»</h2>
-            <div id="map" class="pb-3 pt-3"></div>
-            <p class="p-4 text-center">Vue de l'ensemble des zones activées à un moment durant les jeux olympiques et paralympiques (entre le 15 juillet et le 9 septembre 2024)</p>
+            <div class="pb-4">
+            <h2 class="text-center">Carte globale des «&nbsp;zones&nbsp;JO&nbsp;»</h2>
+            <p class="text-center mx-5">Zones actives à un moment <span class="date_text">entre le 15 juillet et le 9 septembre 2024</span> (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>)</p>
+            </div>
+            <div id="map" class="pb-2 pt-2"></div>
+            <p class="p-3 text-center m-3">Vue de l'ensemble des zones activées à un moment durant les jeux olympiques et paralympiques (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;"><span class="date_text">entre le 15 juillet et le 9 septembre 2024</span></a>)</p>
         </div>
     </div>
   </div>
@@ -99,9 +102,29 @@
         </div>
     </div>
   </div>
-
 </div>
 
+<dialog id='changeDate'>
+        <h3>Changer la période de la carte</h3>
+        <div class="my-5 row">
+            <div class="col-sm-1 mt-1">
+                <label for="date_from" class="form-label">Du</label>
+            </div>
+            <div class="col-sm-5">
+                <input type="date" class="form-control col-sm-4" id="date_from" value="2024-07-15" min="2024-07-01" max="2024-09-30"/>
+            </div>
+            <div class="col-sm-1 mt-1">
+                <label for="date_to" class="form-label col-sm-1">au</label>
+            </div>
+            <div class="col-sm-5">
+                <input type="date" class="form-control col-sm-4" id="date_to" value="2024-09-09"  min="2024-07-01" max="2024-09-30"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6"><input type=submit value="Annuler" class="btn btn-light" onclick="document.getElementById('changeDate').close();"/></div>
+            <div class="col-sm-6 text-end"><input type=submit value="Changer" class="btn btn-primary" onclick="updateTooltipSelectLayersFromDateAndOrder();"/></div>
+        </div>
+</dialog>
 <div class="row">
     <div class="col-sm-12">
       <div class="card shadow-sm p-3">
@@ -460,7 +483,7 @@ geojsonPaths_arrondissements = [
         });
         document.getElementById('zone_blanche_comment').innerHTML = "<strong>Comme tous les habitants d'un département accueillant les jeux, vous êtes concerné par cette zone.</strong>";
 
-        updateTooltipAndOrder();
+        updateTooltipSelectLayersFromDateAndOrder();
         if (marker) {
             map.removeLayer(marker)
         }
@@ -478,11 +501,43 @@ geojsonPaths_arrondissements = [
         }, 500);
     }
     var marker;
-    function updateTooltipAndOrder() {
+
+    var removed = [];
+    const months = { "07":"juillet", "08":"août", "09":"septembre" };
+    function updateTooltipSelectLayersFromDateAndOrder() {
+
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        });
+
+        document.getElementById('changeDate').close();
+        const from_date = document.getElementById('date_from').value.replaceAll('-', '');
+        const to_date = document.getElementById('date_to').value.replaceAll('-', '');
+        const date_text = "entre le " + from_date.substring(6, 8) * 1 + " " + months[from_date.substring(4, 6)] + " et le " + to_date.substring(6, 8) * 1 + " " + months[to_date.substring(4, 6)] +" 2024";
+        date_span = document.getElementsByClassName('date_text');
+        for(i in date_span) {
+            date_span[i].innerHTML = date_text
+        }
+        Object.keys(geojsonLayers).forEach(function (layerid) {
+            if (layerid == 'geojson/arrondissements.geojson') {
+                return;
+            }
+            range = layerid.substring(8,25).split('-');
+            if (from_date > range[1] || range[0] > to_date) {
+                console.log(['layerid disabled', layerid, range]);
+                map.removeLayer(geojsonLayers[layerid]);
+                removed.push(layerid);
+            }else{
+                console.log(['layerid enabled', layerid, range]);
+                const index = removed.indexOf(layerid);
+                if (index > -1) {
+                    geojsonLayers[layerid].addTo(map);
+                    removed.splice(index, 1);
+                }
+            }
+        });
+
         orderLayers();
     }
     function orderLayers() {
@@ -503,6 +558,7 @@ geojsonPaths_arrondissements = [
             window.setTimeout(loaded, 250);
             return;
         }
+        //On s'assure que tous les layers sont bien chargés
         var layerName;
         try {
             ['silt', 'rouge', 'bleu'].forEach(function(zone) {
@@ -515,7 +571,7 @@ geojsonPaths_arrondissements = [
             window.setTimeout(loaded, 250);
             return;
         }
-        updateTooltipAndOrder();
+        updateTooltipSelectLayersFromDateAndOrder();
     }
     loaded();
   </script>
