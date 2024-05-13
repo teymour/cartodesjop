@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "gymnase Max Rousié"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.323802,
+              48.900231
+            ],
+            [
+              2.323995,
+              48.898976
+            ],
+            [
+              2.328672,
+              48.899089
+            ],
+            [
+              2.328565,
+              48.900316
+            ],
+            [
+              2.323802,
+              48.900231
+            ]
+          ]
+        ]
+      },
+      "id": "g0MjY"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "piscine Georges-Vallerey"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.405984,
+              48.875717
+            ],
+            [
+              2.407288,
+              48.875932
+            ],
+            [
+              2.407562,
+              48.875325
+            ],
+            [
+              2.405738,
+              48.875015
+            ],
+            [
+              2.405984,
+              48.875717
+            ]
+          ]
+        ]
+      },
+      "id": "k4NjI"
+    }
+  ]
+}

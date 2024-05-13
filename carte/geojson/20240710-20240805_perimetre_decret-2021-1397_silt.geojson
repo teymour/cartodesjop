@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Le prisme"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.421241,
+              48.91387
+            ],
+            [
+              2.422678,
+              48.913503
+            ],
+            [
+              2.422013,
+              48.912276
+            ],
+            [
+              2.420533,
+              48.912657
+            ],
+            [
+              2.421241,
+              48.91387
+            ]
+          ]
+        ]
+      },
+      "id": "YyMDY"
+    }
+  ]
+}

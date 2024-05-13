@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Olympic Family Hotel"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.307284,
+              48.876765
+            ],
+            [
+              2.306563,
+              48.876246
+            ],
+            [
+              2.305959,
+              48.876588
+            ],
+            [
+              2.30678,
+              48.877167
+            ],
+            [
+              2.307284,
+              48.876765
+            ]
+          ]
+        ]
+      },
+      "id": "UzMzE"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "laboratoire anti-dopage français"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.173885,
+              48.703519
+            ],
+            [
+              2.17312,
+              48.70361
+            ],
+            [
+              2.172951,
+              48.702889
+            ],
+            [
+              2.173729,
+              48.702801
+            ],
+            [
+              2.173885,
+              48.703519
+            ]
+          ]
+        ]
+      },
+      "id": "A3NTA"
+    }
+  ]
+}

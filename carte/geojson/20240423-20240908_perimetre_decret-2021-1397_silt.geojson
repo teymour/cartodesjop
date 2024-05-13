@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Immeuble Pulse"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.364324,
+              48.906437
+            ],
+            [
+              2.364244,
+              48.905775
+            ],
+            [
+              2.365993,
+              48.905704
+            ],
+            [
+              2.366057,
+              48.906395
+            ],
+            [
+              2.364324,
+              48.906437
+            ]
+          ]
+        ]
+      },
+      "id": "c2NDI"
+    }
+  ]
+}

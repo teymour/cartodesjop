@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "laboratoire des courses hippiques"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.277753,
+              48.74885
+            ],
+            [
+              2.278435,
+              48.748892
+            ],
+            [
+              2.278579,
+              48.748761
+            ],
+            [
+              2.278343,
+              48.748068
+            ],
+            [
+              2.277743,
+              48.748302
+            ],
+            [
+              2.277753,
+              48.74885
+            ]
+          ]
+        ]
+      },
+      "id": "EzNTc"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "centre aquatique du Fort d'Aubervilliers"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.403173,
+              48.913775
+            ],
+            [
+              2.404085,
+              48.913334
+            ],
+            [
+              2.40504,
+              48.91295
+            ],
+            [
+              2.405614,
+              48.912844
+            ],
+            [
+              2.405845,
+              48.913676
+            ],
+            [
+              2.403908,
+              48.914388
+            ],
+            [
+              2.403173,
+              48.913775
+            ]
+          ]
+        ]
+      },
+      "id": "kyNzY"
+    }
+  ]
+}

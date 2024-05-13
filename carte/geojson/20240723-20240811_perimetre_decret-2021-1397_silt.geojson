@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Maison de la performance"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.337669,
+              48.919919
+            ],
+            [
+              2.339621,
+              48.919038
+            ],
+            [
+              2.338763,
+              48.917346
+            ],
+            [
+              2.33659,
+              48.918361
+            ],
+            [
+              2.337669,
+              48.919919
+            ]
+          ]
+        ]
+      },
+      "id": "AwNTE"
+    }
+  ]
+}

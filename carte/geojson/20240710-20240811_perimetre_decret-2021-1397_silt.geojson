@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "centre sportif Jules-Ladoumègue"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.395728,
+              48.892938
+            ],
+            [
+              2.397959,
+              48.893185
+            ],
+            [
+              2.398474,
+              48.89073
+            ],
+            [
+              2.398056,
+              48.890462
+            ],
+            [
+              2.397187,
+              48.890244
+            ],
+            [
+              2.396607,
+              48.89073
+            ],
+            [
+              2.395728,
+              48.892938
+            ]
+          ]
+        ]
+      },
+      "id": "gxNDI"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "gymnase des Poissonniers"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.347534,
+              48.900894
+            ],
+            [
+              2.347598,
+              48.899597
+            ],
+            [
+              2.352211,
+              48.899653
+            ],
+            [
+              2.352018,
+              48.900979
+            ],
+            [
+              2.347534,
+              48.900894
+            ]
+          ]
+        ]
+      },
+      "id": "g5NjU"
+    }
+  ]
+}

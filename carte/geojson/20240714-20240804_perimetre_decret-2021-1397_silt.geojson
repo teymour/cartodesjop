@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "centre aquatique d'Aulnay-sous-Bois"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.485528,
+              48.943503
+            ],
+            [
+              2.485614,
+              48.94308
+            ],
+            [
+              2.489133,
+              48.943432
+            ],
+            [
+              2.489948,
+              48.944222
+            ],
+            [
+              2.489326,
+              48.944884
+            ],
+            [
+              2.485528,
+              48.943503
+            ]
+          ]
+        ]
+      },
+      "id": "A5MDg"
+    }
+  ]
+}

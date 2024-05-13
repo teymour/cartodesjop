@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "complexe sportif de l'Ile-des-Vannes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.325969,
+              48.920413
+            ],
+            [
+              2.322342,
+              48.918735
+            ],
+            [
+              2.321141,
+              48.917014
+            ],
+            [
+              2.321548,
+              48.916732
+            ],
+            [
+              2.324831,
+              48.91755
+            ],
+            [
+              2.328265,
+              48.918918
+            ],
+            [
+              2.325969,
+              48.920413
+            ]
+          ]
+        ]
+      },
+      "id": "YxOTE"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "stade nautique Maurice Thorez"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              2.432925,
+              48.856506
+            ],
+            [
+              2.434813,
+              48.856301
+            ],
+            [
+              2.434491,
+              48.855814
+            ],
+            [
+              2.432785,
+              48.855976
+            ],
+            [
+              2.432925,
+              48.856506
+            ]
+          ]
+        ]
+      },
+      "id": "QyNTU"
+    }
+  ]
+}
