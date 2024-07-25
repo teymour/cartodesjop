@@ -175,6 +175,13 @@
   <script src="./js/leaflet.js"></script>
   <script src="./js/turf.min.js"></script>
   <script>
+
+    const dates = window.location.hash.replace('#dates=', '').split('|')
+    if (dates[0].match('2024') && dates[1].match('2024')) {
+        document.getElementById('date_from').value = dates[0];
+        document.getElementById('date_to').value = dates[1];
+    }
+
     var map = L.map('map').setView([48.8695866, 2.3541869], 12);
 
     L.tileLayer('https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
