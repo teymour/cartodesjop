@@ -34,6 +34,9 @@
     @keyframes blinker {
       50% { opacity: 0; }
     }
+    .btn-link {
+        padding: 0px 0px 4px 0px !important;
+    }
 </style>
 </head>
 <body>
@@ -70,9 +73,9 @@
             <h2 class="text-center">Carte globale des «&nbsp;zones&nbsp;JO&nbsp;»</h2>
             <p class="text-center mx-1">Zones actives à un moment <span class="date_text">entre le 15 juillet et le 9 septembre 2024</span>
                 <br/>
-                (&nbsp;<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>
-                | voir que <a href="#" onclick="selectToday();return false;">aujourd'hui</a>
-                ou que <a href="#" onclick="selectTomorrow();return false;">demain</a>
+                (&nbsp;<button class="btn btn-link" onclick="document.getElementById('changeDate').showModal();">changer de période</button>
+                | voir que <button class="btn btn-link" onclick="selectToday();">aujourd'hui</button>
+                ou que <button class="btn btn-link" onclick="selectTomorrow();">demain</button>
                 )</p>
             </div>
             <div id="map" class="pb-2 pt-2"></div>
