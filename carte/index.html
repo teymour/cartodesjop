@@ -62,14 +62,24 @@
     </div>
   </div>
 </section>
-
+<script>
+now = new Date()
+const today = now.toISOString().split('T')[0];
+now = new Date(now)
+now.setDate(now.getDate() + 1)
+const tomorrow = now.toISOString().split('T')[0];
+</script>
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3 visavi">
   <div class="col">
     <div class="card shadow-sm">
         <div class="p-3">
             <div class="pb-4">
             <h2 class="text-center">Carte globale des «&nbsp;zones&nbsp;JO&nbsp;»</h2>
-            <p class="text-center mx-5">Zones actives à un moment <span class="date_text">entre le 15 juillet et le 9 septembre 2024</span> (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>)</p>
+            <p class="text-center mx-5">Zones actives à un moment <span class="date_text">entre le 15 juillet et le 9 septembre 2024</span>
+                (&nbsp;<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>
+                | voir que <a href="#" onclick="document.getElementById('date_from').value = today; document.getElementById('date_to').value = document.getElementById('date_from').value; updateTooltipSelectLayersFromDateAndOrder();return false;">aujourd'hui</a>
+                ou que <a href="#" onclick="document.getElementById('date_from').value = tomorrow; document.getElementById('date_to').value = document.getElementById('date_from').value; updateTooltipSelectLayersFromDateAndOrder();return false;">demain</a>
+                )</p>
             </div>
             <div id="map" class="pb-2 pt-2"></div>
             <p class="p-3 text-center m-3">Vue de l'ensemble des zones activées à un moment durant les jeux olympiques et paralympiques (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;"><span class="date_text">entre le 15 juillet et le 9 septembre 2024</span></a>)</p>
