@@ -62,18 +62,18 @@
     </div>
   </div>
 </section>
-
 <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3 visavi">
   <div class="col">
     <div class="card shadow-sm">
         <div class="p-3">
             <div class="pb-4">
             <h2 class="text-center">Carte globale des «&nbsp;zones&nbsp;JO&nbsp;»</h2>
-            <p class="text-center mx-5">Zones actives <span class="date_text">à un moment entre le 15 juillet et le 9 septembre 2024</span> (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>)</p>
-            <div class="text-center mx-5">
-              <button class="btn btn-link" onclick="selectToday();">Aujourd’hui</button>
-              <button class="btn btn-link" onclick="selectTomorrow();">Demain</button>
-            </div>
+            <p class="text-center mx-1">Zones actives à un moment <span class="date_text">entre le 15 juillet et le 9 septembre 2024</span>
+                <br/>
+                (&nbsp;<a href="#" onclick="document.getElementById('changeDate').showModal();return false;">changer de période</a>
+                | voir que <a href="#" onclick="selectToday();return false;">aujourd'hui</a>
+                ou que <a href="#" onclick="selectTomorrow();return false;">demain</a>
+                )</p>
             </div>
             <div id="map" class="pb-2 pt-2"></div>
             <p class="p-3 text-center m-3">Vue de l'ensemble des zones activées à un moment durant les jeux olympiques et paralympiques (<a href="#" onclick="document.getElementById('changeDate').showModal();return false;"><span class="date_text">entre le 15 juillet et le 9 septembre 2024</span></a>)</p>
@@ -548,19 +548,10 @@ geojsonPaths_arrondissements = [
     }
 
     function selectDay(selectedDate) {
-      let month = selectedDate.getMonth() + 1;
-      month = month.toString().padStart(2, '0');
+      document.getElementById('date_from').value = selectedDate.toISOString().split('T')[0];
+      document.getElementById('date_to').value = selectedDate.toISOString().split('T')[0];
 
-      const selectedDateString = [
-        selectedDate.getFullYear(),
-        month,
-        selectedDate.getDate(),
-      ].join('-');
-
-      document.getElementById('date_from').value = selectedDateString;
-      document.getElementById('date_to').value = selectedDateString;  
-      
-      updateTooltipSelectLayersFromDateAndOrder();  
+      updateTooltipSelectLayersFromDateAndOrder();
     }
     function updateTooltipSelectLayersFromDateAndOrder() {
 
@@ -576,7 +567,7 @@ geojsonPaths_arrondissements = [
         let date_text = "à un moment entre le " + from_date.substring(6, 8) * 1 + " " + months[from_date.substring(4, 6)] + " et le " + to_date.substring(6, 8) * 1 + " " + months[to_date.substring(4, 6)] +" 2024";
 
         if (from_date == to_date) {
-          date_text = "le " + from_date.substring(6, 8) * 1 + " " + months[from_date.substring(4, 6)] +" 2024";          
+          date_text = "le " + from_date.substring(6, 8) * 1 + " " + months[from_date.substring(4, 6)] +" 2024";
         }
 
         date_span = document.getElementsByClassName('date_text');
