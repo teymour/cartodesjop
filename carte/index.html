@@ -573,6 +573,8 @@ geojsonPaths_arrondissements = [
         const from_date = document.getElementById('date_from').value.replaceAll('-', '');
         const to_date = document.getElementById('date_to').value.replaceAll('-', '');
 
+        history.pushState(null, null, '?dates=' + from_date + '|' + to_date);
+
         let date_text = "entre le " + from_date.substring(6, 8) * 1 + " " + months[from_date.substring(4, 6)] + " et le " + to_date.substring(6, 8) * 1 + " " + months[to_date.substring(4, 6)] +" 2024";
 
         if (from_date == to_date) {
