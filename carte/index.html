@@ -176,10 +176,10 @@
   <script src="./js/turf.min.js"></script>
   <script>
 
-    const dates = window.location.search.replace('?dates=', '').split('|')
-    if (dates[0].match('2024') && dates[1].match('2024')) {
-        document.getElementById('date_from').value = dates[0];
-        document.getElementById('date_to').value = dates[1];
+    const dates_range = window.location.search.replace('?dates=', '').split('|')
+    if (dates_range[0].match('2024') && dates_range[1].match('2024')) {
+        document.getElementById('date_from').value = dates_range[0];
+        document.getElementById('date_to').value = dates_range[1];
     }
 
     var map = L.map('map').setView([48.8695866, 2.3541869], 12);
@@ -453,12 +453,12 @@ geojsonPaths_arrondissements = [
                 if (!infos[1]) {
                     return;
                 }
-                zone = infos[3].replace('.geojson', '');
-                dates = infos[0].replace('geojson/', '');
-                if (!actifs[zone][proximity][dates]) {
-                    actifs[zone][proximity][dates] = [];
+                geo_zone = infos[3].replace('.geojson', '');
+                geo_dates = infos[0].replace('geojson/', '');
+                if (!actifs[geo_zone][proximity][geo_dates]) {
+                    actifs[geo_zone][proximity][geo_dates] = [];
                 }
-                actifs[zone][proximity][dates].push(layer);
+                actifs[geo_zone][proximity][geo_dates].push(layer);
             });
         });
 
@@ -482,12 +482,12 @@ geojsonPaths_arrondissements = [
                         if (nb) {
                             comment[proximity] += " et";
                         }
-                        dates = item.split('-');
+                        enabled_dates = item.split('-');
                         tooltype = 'data-bs-toggle="tooltip" title="'+sources.join(', ')+'"';
-                        if (dates[0] == dates[1]) {
-                            comment[proximity] += " le <abbr "+tooltype+">"+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
+                        if (enabled_dates[0] == enabled_dates[1]) {
+                            comment[proximity] += " le <abbr "+tooltype+">"+enabled_dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
                         }else{
-                            comment[proximity] += " du <abbr "+tooltype+">"+dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+" au "+dates[1].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
+                            comment[proximity] += " du <abbr "+tooltype+">"+enabled_dates[0].replace(/(....)(..)(..)/, '$3/$2/$1')+" au "+enabled_dates[1].replace(/(....)(..)(..)/, '$3/$2/$1')+"</abbr>";
                         }
                         nb++;
                     });
