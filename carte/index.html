@@ -538,7 +538,6 @@ geojsonPaths_arrondissements = [
             document.getElementById("explications").scrollIntoView();
             classes = document.getElementsByClassName('zone_comment');
             for (let i = 0; i < classes.length; i++) {
-                console.log(['blink', classes]);
                 classes[i].style = "animation: blinker 1s linear 2;";
             }
         }, 500);
@@ -590,11 +589,9 @@ geojsonPaths_arrondissements = [
             }
             range = layerid.substring(8,25).split('-');
             if (from_date > range[1] || range[0] > to_date) {
-                console.log(['layerid disabled', layerid, range]);
                 map.removeLayer(geojsonLayers[layerid]);
                 removed.push(layerid);
             }else{
-                console.log(['layerid enabled', layerid, range]);
                 const index = removed.indexOf(layerid);
                 if (index > -1) {
                     geojsonLayers[layerid].addTo(map);
@@ -619,7 +616,6 @@ geojsonPaths_arrondissements = [
     }
     function loaded() {
         if (Object.keys(geojsonLayers).length != Object.keys(geojsonPaths['rouge']).length + Object.keys(geojsonPaths['bleu']).length +Object.keys(geojsonPaths['silt']).length + 1) {
-            console.log(['wrong nb layers']);
             window.setTimeout(loaded, 250);
             return;
         }
@@ -632,7 +628,6 @@ geojsonPaths_arrondissements = [
                 }
             })
         }catch (e) {
-            console.log(['layer not loaded yet', layerName, e]);
             window.setTimeout(loaded, 250);
             return;
         }
