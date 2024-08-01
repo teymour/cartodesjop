@@ -177,7 +177,7 @@
   <script>
 
     const dates_range = window.location.search.replace('?dates=', '').split('|')
-    if (dates_range[0].match('2024') && dates_range[1].match('2024')) {
+    if (dates_range[0].match('2024-') && dates_range[1].match('2024-')) {
         document.getElementById('date_from').value = dates_range[0];
         document.getElementById('date_to').value = dates_range[1];
     }
