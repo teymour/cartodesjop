@@ -223,9 +223,10 @@
             "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_rouge.geojson": "triathlon",
             "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_rouge.geojson": "LE GOLF NATIONAL",
             "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_rouge.geojson": "VELODROME NATIONAL DE SAINT QUENTIN EN YVELINES",
-            "geojson/20240801-20240801_perimetre_course-en-ligne_rouge.geojson": "Familiarisation Course en ligne ",
-            "geojson/20240803-20240804_perimetre_course-en-ligne-homme_rouge.geojson": "Course en ligne",
-            "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_rouge.geojson": "Course en ligne",
+            "geojson/20240801-20240801_perimetre_course-en-ligne_rouge.geojson": "Familiarisation Course en ligne (16h à 18h)",
+            "geojson/20240802-20240802_perimetre_course-en-ligne_rouge.geojson": "Familiarisation Course en ligne (14h à 16h)",
+            "geojson/20240803-20240803_perimetre_course-en-ligne-homme_rouge.geojson": "Course en ligne (11h à 18h15)",
+            "geojson/20240804-20240804_perimetre_cyclisme-courseenligne-femme_rouge.geojson": "Course en ligne (14h à 18h45)",
             "geojson/20240805-20240810_perimetre_CIRCULATION-DISPOSITIF-SITE-D-ESCALADE-DU-BOURGET-SP_rouge.geojson": "SITE D ESCALADE DU BOURGET",
             "geojson/20240810-20240811_perimetre_marathon-femme_rouge.geojson": "Marathon",
             "geojson/20240810-20240811_perimetre_marathon-homme_rouge.geojson": "Marathon",
@@ -271,8 +272,8 @@
             "geojson/20240728-20240805_perimetre_triathlon-relaix-mixte_bleu.geojson": "triathlon",
             "geojson/20240801-20240810_perimetre_CIRCULATION-DISPOSITIF-LE-GOLF-NATIONAL-SP_bleu.geojson": "LE GOLF NATIONAL",
             "geojson/20240801-20240901_perimetre_CIRCULATION-DISPOSITIF-VELODROME-NATIONAL-DE-SAINT-QUENTIN-EN-YVELINES-SP_bleu.geojson": "VELODROME NATIONAL DE SAINT QUENTIN EN YVELINES",
-            "geojson/20240803-20240804_perimetre_course-en-ligne-homme_bleu.geojson": "Course en ligne",
-            "geojson/20240803-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson": "Course en ligne",
+            "geojson/20240803-20240803_perimetre_course-en-ligne-homme_bleu.geojson": "Course en ligne (11h à 18h15)",
+            "geojson/20240804-20240804_perimetre_cyclisme-courseenligne-femme_bleu.geojson": "Course en ligne (14h à 18h45)",
             "geojson/20240810-20240811_perimetre_marathon-femme_bleu.geojson": "Marathon",
             "geojson/20240810-20240811_perimetre_marathon-homme_bleu.geojson": "Marathon",
             "geojson/20240810-20240811_perimetre_marathon-pour-tous_bleu.geojson": "Marathon"
@@ -559,7 +560,6 @@ geojsonPaths_arrondissements = [
     function selectDay(selectedDate) {
       document.getElementById('date_from').value = selectedDate.toISOString().split('T')[0];
       document.getElementById('date_to').value = selectedDate.toISOString().split('T')[0];
-
       updateTooltipSelectLayersFromDateAndOrder();
     }
     function updateTooltipSelectLayersFromDateAndOrder() {
