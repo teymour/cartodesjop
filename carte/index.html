@@ -572,7 +572,7 @@ geojsonPaths_arrondissements = [
         document.getElementById('changeDate').close();
         const from_date = document.getElementById('date_from').value.replaceAll('-', '');
         const to_date = document.getElementById('date_to').value.replaceAll('-', '');
-        if (from_date && to_date) {
+        if (from_date && to_date && from_date != '20240715' && to_date != '20240909') {
             history.pushState(null, null, '?dates=' + from_date + '|' + to_date);
         }
 
